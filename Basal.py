@@ -331,5 +331,5 @@ class Basal:
         else: return float(num ** expo)
 
     def __int__(self) -> int : return self.num_value    
-    def __str__(self) -> str : return str(self.display + "" + self.number)
+    def __str__(self) -> str : return str(self.display + " " + self.number)
 
