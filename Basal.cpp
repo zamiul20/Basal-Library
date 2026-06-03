@@ -16,7 +16,7 @@ public:
     string display = "<10T";
 
     Basal(){}
-    Basal(int bass, double vel, int pol, int dis, int eco, int rip_val, int acc)
+    Basal(double bass, double vel, int pol, int dis, int eco, int rip_val, int acc)
     {
         base_value = bass;
         velocity = vel;
