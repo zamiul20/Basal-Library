@@ -324,6 +324,50 @@ class Basal:
         
         return outout + "T"
 
+    def disintegrate(self, noom : str) -> float:
+        if bool(self.echo != 2):
+            noom = Basal.unechor(self.ripple, noom, self.echo)
+        
+        noom = noom + '0'
+        if bool(self.polar != 2):
+            outout = float(0) ; l = len(noom) ; q = l - 2
+
+            for z in range(l):
+                if bool(noom[z]   == '.') : continue
+                q -= 1
+                if bool(z % 2 == self.polar):
+                    outout += Basal.Cn(noom[z]) * Basal.expor(self.base_value, (q * self.velocity)) * (q + 1)
+                else:
+                    outout -= Basal.Cn(noom[z]) * Basal.expor(self.base_value, (q * self.velocity)) * (q + 1)
+            
+            return outout
+        
+        else:
+            po = 0
+            if bool(num[len(num) - 1] == '-'): num = num[1:];  po = 1
+            outout = 0;num = ''.join(reversed(num))
+
+            if bool('.' in num):
+                pos = num.index('.')
+                left =  num[:pos]
+                right = num[pos + 1:]        
+
+                for z in range(left.__len__()):
+                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(left[z]) - 48) * (q + 1)
+
+                
+                for z in range(len(right)):
+                    outout += Basal.expor(self.base_value, (0 - (z * self.velocity))) * (ord(right[z]) - 48) * (q + 1)
+
+            else:
+                for z in range(num.__len__()):          
+                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(num[z]) - 48) * (q + 1)
+
+
+            if bool(po == 0):return outout
+            else: return (0-outout)
+
+
     def expor(num : float, expo : float) -> float:
         if bool(abs(num) != num): 
             if bool(expo % 2 == 1) : return float(num ** expo)
