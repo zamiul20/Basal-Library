@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.Swift;
 using System.Text;
 
 namespace Calculator
@@ -428,6 +429,60 @@ namespace Calculator
             display = outout + "T";
 
             return display;
+        }
+
+        #endregion
+
+        #region CALCULUS
+
+        public decimal disintegrate(string num, Basal inbas)
+        {
+            if (inbas.echo != 2) { num = inbas.unechor(inbas.ripple, num, inbas.echo); }
+
+            num += "0";
+            if (inbas.polar != 2)
+            {
+                decimal outout = 0M ; int l = num.Length ; int q = l - 2;
+
+                for (int z = 0; z < l; z++)
+                {
+                    if (num[z] == '.') { continue ;}
+                    q--;
+                    if (z % 2 == inbas.polar)
+                        outout += (((int)num[z]) - 48) * Basal.expor(inbas.base_value, (q * inbas.velocity)) * (q + 1);
+                    else
+                        outout += (((int)num[z]) - 48) * Basal.expor(inbas.base_value, (q * inbas.velocity)) * (q + 1);                   
+                }
+                return outout;
+            }
+            else
+            {
+                po = 0;
+                if (num[num.Length - 1] == '-') { num = num.Substring(1) ; po = 1; }
+                decimal outout = 0M ; num.Join(revstr(num));
+
+                if (num.IndexOf('.') != -1)
+                {
+                    int pos = num.IndexOf('.');
+                    string left = num.Substring(0, pos);
+                    string right = num.Substring(pos);
+
+                    for (int z = 0; z < pos; z++)
+                    { outout += Basal.expor(inbas.base_value, ((z - 1) * inbas.velocity)) * (((int)left[z]) - 48) * (z + 1); }
+                    for (int z = 0; z < right.Length; z++)
+                    { outout += Basal.expor(inbas.base_value, (0 - (z * inbas.velocity))) * (((int)right[z]) - 48) * (z + 1); }
+                }
+                else
+                {
+                    for (int z = 0; z < num.Length; z++)
+                    { outout += Basal.expor(inbas.base_value, ((z - 1) * inbas.velocity)) * (((int)num[z]) - 48) * (z + 1); }
+                }
+
+                if (po == 0)
+                    return outout;
+                else
+                    return (0 - outout);
+            }
         }
 
         #endregion

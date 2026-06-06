@@ -353,15 +353,15 @@ class Basal:
                 right = num[pos + 1:]        
 
                 for z in range(left.__len__()):
-                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(left[z]) - 48) * (q + 1)
+                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(left[z]) - 48) * (z + 1)
 
                 
                 for z in range(len(right)):
-                    outout += Basal.expor(self.base_value, (0 - (z * self.velocity))) * (ord(right[z]) - 48) * (q + 1)
+                    outout += Basal.expor(self.base_value, (0 - (z * self.velocity))) * (ord(right[z]) - 48) * (z + 1)
 
             else:
                 for z in range(num.__len__()):          
-                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(num[z]) - 48) * (q + 1)
+                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(num[z]) - 48) * (z + 1)
 
 
             if bool(po == 0):return outout
