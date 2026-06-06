@@ -449,9 +449,9 @@ namespace Calculator
                     if (num[z] == '.') { continue ;}
                     q--;
                     if (z % 2 == inbas.polar)
-                        outout += (((int)num[z]) - 48) * Basal.expor(inbas.base_value, (q * inbas.velocity)) * (q + 1);
+                        outout += (((int)num[z]) - 48) * expor(inbas.base_value, (q * inbas.velocity)) * q;
                     else
-                        outout += (((int)num[z]) - 48) * Basal.expor(inbas.base_value, (q * inbas.velocity)) * (q + 1);                   
+                        outout += (((int)num[z]) - 48) * expor(inbas.base_value, (q * inbas.velocity)) * q;                   
                 }
                 return outout;
             }
@@ -468,14 +468,14 @@ namespace Calculator
                     string right = num.Substring(pos);
 
                     for (int z = 0; z < pos; z++)
-                    { outout += Basal.expor(inbas.base_value, ((z - 1) * inbas.velocity)) * (((int)left[z]) - 48) * (z + 1); }
+                    { outout += Basal.expor(inbas.base_value, ((z - 1) * inbas.velocity)) * (((int)left[z]) - 48) * z; }
                     for (int z = 0; z < right.Length; z++)
-                    { outout += Basal.expor(inbas.base_value, (0 - (z * inbas.velocity))) * (((int)right[z]) - 48) * (z + 1); }
+                    { outout += Basal.expor(inbas.base_value, (0 - (z * inbas.velocity))) * (((int)right[z]) - 48) * z; }
                 }
                 else
                 {
                     for (int z = 0; z < num.Length; z++)
-                    { outout += Basal.expor(inbas.base_value, ((z - 1) * inbas.velocity)) * (((int)num[z]) - 48) * (z + 1); }
+                    { outout += Basal.expor(inbas.base_value, ((z - 1) * inbas.velocity)) * (((int)num[z]) - 48) * z; }
                 }
 
                 if (po == 0)
