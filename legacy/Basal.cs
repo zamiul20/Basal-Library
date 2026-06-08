@@ -481,7 +481,7 @@ namespace Calculator
                 if (po == 0)
                     return outout;
                 else
-                    return (0 - outout);
+                    return 0 - outout;
             }
         }
 
