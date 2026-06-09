@@ -9,7 +9,7 @@ class Basal:
 
     num_value = int(0)
     base_value = int(10)
-    number = "0"
+    number = []
     display = "<10T"
 
     def __init__(self,
@@ -68,7 +68,7 @@ class Basal:
             else:
                 self.num_value = Basal.tobasten(num, bass, vel)'''
 
-    def Conv(self, num : int) -> str:
+    def Conv(self, num : int) -> list:
         outout = ''
 
         if bool(self.base_value == 1) : return ValueError
@@ -95,7 +95,7 @@ class Basal:
         
         return outout
 
-    def Donv(self, num : str) -> float | int:
+    def Donv(self, num : list) -> float | int:
         outout = 0
 
         if bool(self.base_value == 1) : return ValueError
@@ -112,7 +112,7 @@ class Basal:
         
         else:
             bass = 1 / self.base_value
-            num = ''.join(reversed(num))
+            num = reversed(num)
             if bool(self.echo != 2):
                 num = Basal.unechor(self.ripple, num, self.echo)        
             
@@ -367,6 +367,6 @@ class Basal:
             else : return abs(float(num ** expo))
         else: return float(num ** expo)
 
-    def __int__(self) -> int : return self.num_value    
+    def __float__(self) -> float : return self.num_value
     def __str__(self) -> str : return str(self.display + " " + self.number)
 
