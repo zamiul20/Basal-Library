@@ -337,7 +337,6 @@ namespace Calculator
                 {
                     if (fire == "I")
                     {
-
                         if (x == 0) { break; }
                         else
                         {
@@ -347,7 +346,6 @@ namespace Calculator
 
                     else if (fire == "780")
                     {
-
                         if (x == 0) { break; }
                         else
                         {
@@ -504,7 +502,7 @@ namespace Calculator
         public decimal value = 0;
         #endregion
 
-        public Basal() { }
+        public Basal() {}
 
         public Basal(
             string num,
@@ -525,17 +523,11 @@ namespace Calculator
             velocity = vel;
 
             if (echo != 2)
-            {
                 num = unechor(rip, num, echo);
-            }
             if (pol != 2)
-            {
                 value = polaris(num, bass, vel, pol);
-            }
             else
-            {
                 value = tobasten(num, bass, vel);
-            }
         }
 
         public Basal(
