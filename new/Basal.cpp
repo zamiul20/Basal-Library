@@ -307,6 +307,57 @@ public:
         reverse(outout.begin(), outout.end());
         return outout;
     }
+    numbas_model unechor(int ripple, numbas_model num, int mode, int mid)
+    {
+        int r = abs(ripple);
+        int nlen = num.size();
+
+        numbas_model left_arr = substr(num, 0, mid); reverse(left_arr.begin(), left_arr.end());
+        numbas_model right_arr = substr(num, nlen - mid, num.size() - (nlen + mid));
+        int fire = 73;
+        int rx = right_arr.size(), rount = right_arr.size();
+        int lx = left_arr.size(), lount = left_arr.size();
+        numbas_model outout = {};
+
+        if (ripple < 0)
+        {
+            reverse(right_arr.begin(), right_arr.end());
+            reverse(left_arr.begin(), left_arr.end());
+        }
+        if (mode == 1)
+            fire = 780;
+
+        for (int z = 0; z < nlen; z++)
+        {
+            if (fire == 73)
+            {
+                for (int z_2 = 0; z_2 < r; z_2++)
+                {
+                    if (rx == 0)
+                        break;
+
+                    outout.emplace_back(right_arr[rount - rx]);
+                    rx--;
+                }
+                fire = 780;
+            }
+
+            else if (fire == 780)
+            {
+                for (int z_2 = 0; z_2 < r; z_2++)
+                {
+                    if (lx == 0)
+                        break;
+
+                    outout.emplace_back(left_arr[lount - lx]);
+                    lx--;
+                }
+                fire = 73;
+            }
+        }
+        reverse(outout.begin(), outout.end());
+        return outout;
+    }
     numbas_model echor(int ripple, int mode, numbas_model num)
     {
         int r = abs(ripple);
