@@ -102,7 +102,7 @@ public:
             }
             for (int z = 0; z < noom_right.length(); z++)
             {
-                outout += (pow(bass, (0 - ((z + 1) * velocity))) * (noom_left[z] - 48));                
+                outout += (pow(bass, (0 - ((z + 1) * velocity))) * (noom_right[z] - 48));                
             }
         }
         else {
