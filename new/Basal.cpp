@@ -1,9 +1,7 @@
-#include <iostream>
 #include <string>
 #include <cmath>
 #include <vector>
 #include <variant>
-#include <algorithm>
 
 using namespace std;
 using numbas_model = vector<variant<double, char>>;
@@ -412,6 +410,4 @@ public:
 int main()
 {
     Basal bass;
-
-    cout << bass.base_value;
 }
