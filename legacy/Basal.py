@@ -95,7 +95,7 @@ class Basal:
         
         return outout
 
-    def Donv(self, num : str) -> float | int:
+    def Donv(self, num : str) -> float:
         outout = 0
 
         if bool(self.base_value == 1) : return ValueError
@@ -220,7 +220,7 @@ class Basal:
 
         return Basal.notobasten(Basal.tobasten(num, bass, velocity) + albs, bass, velocity, accuracy)
 
-    def unechor(ripple : int, num : str, mode : int) -> str:    
+    def unechor(ripple : int, num : str, mode : int) -> str:
         r = abs(ripple)
         nlen = len(num) - 1
         try:mid = num.index('জ')
@@ -328,44 +328,81 @@ class Basal:
         if bool(self.echo != 2):
             noom = Basal.unechor(self.ripple, noom, self.echo)
         
-        noom = noom + '0'
         if bool(self.polar != 2):
             outout = float(0) ; l = len(noom) ; q = l - 2
+            if bool('.' in noom) : q = noom.index('.')
 
             for z in range(l):
-                if bool(noom[z]   == '.') : continue
+                if bool(noom[z] == '.') : continue
                 q -= 1
                 if bool(z % 2 == self.polar):
-                    outout += Basal.Cn(noom[z]) * Basal.expor(self.base_value, (q * self.velocity)) * q
+                    outout += Basal.Cn(noom[z]) * Basal.expor(self.base_value, ((q - 1) * self.velocity)) * (q * self.velocity)
                 else:
-                    outout -= Basal.Cn(noom[z]) * Basal.expor(self.base_value, (q * self.velocity)) * q
+                    outout -= Basal.Cn(noom[z]) * Basal.expor(self.base_value, ((q - 1) * self.velocity)) * (q * self.velocity)
             
             return outout
         
         else:
             po = 0
-            if bool(num[len(num) - 1] == '-'): num = num[1:];  po = 1
-            outout = 0;num = ''.join(reversed(num))
+            if bool(noom[len(noom) - 1] == '-'): noom = noom[1:];  po = 1
+            outout = 0
 
-            if bool('.' in num):
-                pos = num.index('.')
-                left =  num[:pos]
-                right = num[pos + 1:]        
+            if bool('.' in noom):
+                pos = noom.index('.')
+                left = noom[:pos]
+                right = noom[pos + 1:] ; left = ''.join(reversed(left))
 
                 for z in range(left.__len__()):
-                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(left[z]) - 48) * z
+                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(left[z]) - 48) * (z * self.velocity)
 
                 
                 for z in range(len(right)):
-                    outout += Basal.expor(self.base_value, (0 - (z * self.velocity))) * (ord(right[z]) - 48) * z
+                    outout += Basal.expor(self.base_value, (0 - ((z + 2) * self.velocity))) * (ord(right[z]) - 48) * (0 - ((z + 1) * self.velocity))
 
             else:
-                for z in range(num.__len__()):          
-                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(num[z]) - 48) * z
+                for z in range(noom.__len__()):          
+                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * (ord(noom[z]) - 48) * (z * self.velocity)
 
 
             if bool(po == 0):return outout
             else: return (0-outout)
+    def integrate(self, noom : str, C : float | None = 0) -> float:
+        if bool(self.echo != 2) : noom = Basal.unechor(self.ripple, noom, self.echo)
+
+        if bool(self.polar != 2):
+            outout = float(0) ; l = len(noom) ; q = l - 2
+
+            for z in range(l):
+                if bool(noom[z] == '.') : continue
+                q -= 1
+                if bool(z % 2 == self.polar):
+                    outout += noom[z] * Basal.expor(self.base_value, ((q + 1) * self.velocity)) / (q / 1)
+                else:
+                    outout -= noom[z] * Basal.expor(self.base_value, ((q + 1) * self.velocity)) / (q / 1)
+
+            return outout
+        
+        else:
+            po = 0
+            if bool(num[len(num) - 1] == '-'): num = num[1:];  po = 1
+            outout = 0;num = reversed(num)
+
+            if bool('.' in num):
+                pos = num.index('.')
+                left = num[:pos] ; right = num[pos + 1:]
+
+                for z in range(len(left)):
+                    outout += Basal.expor(self.base_value, ((z + 1) * self.velocity)) * left[z] / (z + 1)
+
+                for z in range(len(right)):
+                    outout += Basal.expor(self.base_value, (0 - (z * self.velocity))) * right[z] / z
+
+            else:
+                for z in range(len(num)):
+                    outout += Basal.expor(self.base_value, ((z + 1) * self.velocity)) * num[z] / (z + 1)
+            
+            if bool(po == 0):return outout
+            else: return (0 - outout)
 
 
     def expor(num : float, expo : float) -> float:
