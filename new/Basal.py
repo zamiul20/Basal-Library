@@ -28,48 +28,8 @@ class Basal:
         self.base_value = bass
         self.display = Basal.ct_disp(self)
 
-    '''def __init__(self,
-                 num : str,
-                 bass : float,
-                 vel : float | None = 1,
-                 pol : int | None = 2,
-                 dis : int | None = 0,
-                 eco : int | None = 2,
-                 rip_val : int | None = 2
-                 ) -> None:
-        self.polar = pol
-        self.discretion = dis
-        self.echo = eco
-        self.ripple = rip_val
-        self.velocity = vel
-        self.base_value = bass
-        self.number = num
-        self.display = Basal.ct_disp(self)
-
-        if bool(bass == 1) : return ValueError
-
-        if bool(bass > 1):
-            if bool(eco != 2):
-                num = Basal.unechor(rip_val, num, eco)        
-
-            if bool(pol != 2):
-                self.num_value = Basal.polariser(num, bass, pol, vel)
-            else:
-                self.num_value = Basal.tobasten(num, bass, vel)
-        
-        else:
-            bass = 1 / bass
-            num = ''.join(reversed(num))
-            if bool(eco != 2):
-                num = Basal.unechor(rip_val, num, eco)        
-
-            if bool(pol != 2):
-                self.num_value = Basal.polariser(num, bass, pol, vel)
-            else:
-                self.num_value = Basal.tobasten(num, bass, vel)'''
-
     def Conv(self, num : int) -> list:
-        outout = ''
+        outout = []
 
         if bool(self.base_value == 1) : return ValueError
 
@@ -84,7 +44,6 @@ class Basal:
         
         else:
             bass = 1 / self.base_value
-            num = ''.join(reversed(num))
             outout = Basal.notobasten(num, bass, self.velocity, self.accuracy)
 
             if bool(self.polar != 2):
@@ -112,7 +71,7 @@ class Basal:
         
         else:
             bass = 1 / self.base_value
-            num = reversed(num)
+            num.reverse()
             if bool(self.echo != 2):
                 num = Basal.unechor(self.ripple, num, self.echo)        
             
@@ -130,7 +89,7 @@ class Basal:
     def tobasten(num : list, bass : float, velocity : float | None = 1) -> float:
         po = 0
         if bool(num[len(num) - 1] == '-'): del num[0]; po = 1
-        outout = 0;num = ''.join(reversed(num))
+        outout = 0;num.reverse()
 
         if bool('.' in num):
             pos = num.index('.')
@@ -168,7 +127,7 @@ class Basal:
             
         if bool(num == 0) : 
             if bool(statis == 0): return outout
-            else: return [0, '.'] + reversed(outout)
+            else: outout.reverse() ; return [0, '.'] + outout
         outout += '.'
 
         for z in range(accuracy - ceil):
@@ -184,7 +143,7 @@ class Basal:
             outout.append(t)
         
         if bool(statis == 0): return outout
-        else: return [0, '.'] + reversed(outout)
+        else: outout.reverse() ; return [0, '.'] + outout
 
     def polariser(num : list, bass: float, mod : int, velocity : float) -> float:
         outout = float(0)
@@ -203,7 +162,7 @@ class Basal:
     def depolaris(num : list, bass : float, mod : int, velocity : float, accuracy : int | None = 30) -> list:
         albs = 0
         
-        x = reversed(num)
+        x = num ; x.reverse()
 
         z = 0
         if bool('.' in x) : z = x.index('.') - len(x)
@@ -318,47 +277,83 @@ class Basal:
         return outout + "T"
 
     def disintegrate(self, noom : list) -> float:
-        if bool(self.echo != 2):
-            noom = Basal.unechor(self.ripple, noom, self.echo)
+        if bool(self.echo != 2) : noom = Basal.unechor(self.ripple, noom, self.echo)
         
-        noom = noom + [0]
         if bool(self.polar != 2):
             outout = float(0) ; l = len(noom) ; q = l - 2
+            if bool('.' in noom) : q = noom.index('.')
 
             for z in range(l):
                 if bool(noom[z] == '.') : continue
                 q -= 1
                 if bool(z % 2 == self.polar):
-                    outout += noom[z] * Basal.expor(self.base_value, (q * self.velocity)) * q
+                    outout += noom[z] * Basal.expor(self.base_value, ((q - 1) * self.velocity)) * (q * self.velocity)
                 else:
-                    outout -= noom[z] * Basal.expor(self.base_value, (q * self.velocity)) * q
+                    outout -= noom[z] * Basal.expor(self.base_value, ((q - 1) * self.velocity)) * (q * self.velocity)
             
             return outout
         
         else:
             po = 0
             if bool(num[len(num) - 1] == '-'): num = num[1:];  po = 1
-            outout = 0;num = ''.join(reversed(num))
+            outout = 0
 
             if bool('.' in num):
                 pos = num.index('.')
-                left =  num[:pos]
-                right = num[pos + 1:]        
+                left = num[:pos] ; right = num[pos + 1:]
+                left.reverse()
 
                 for z in range(left.__len__()):
-                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * left[z] * z
-
+                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * left[z] * (z * self.velocity)
                 
                 for z in range(len(right)):
-                    outout += Basal.expor(self.base_value, (0 - (z * self.velocity))) * right[z] * z
+                    outout += Basal.expor(self.base_value, (0 - ((z + 2) * self.velocity))) * right[z] * (0 - ((z + 1) * self.velocity))
 
             else:
                 for z in range(num.__len__()):          
-                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * num[z] * z
-
+                    outout += Basal.expor(self.base_value, ((z - 1) * self.velocity)) * noom[z] * (z * self.velocity)
 
             if bool(po == 0):return outout
             else: return (0-outout)
+    def disintegrate_t(self, noom : list) -> list:
+        if bool(self.echo != 2) : noom = Basal.unechor(self.ripple, noom, self.echo)
+        
+        if bool(self.polar != 2):
+            outout = [] ; l = len(noom) ; q = l - 2
+            if bool('.' in noom) : q = noom.index('.')
+
+            for z in range(l):
+                if bool(noom[z] == '.') : outout.append('.') ; continue
+                q -= 1
+                if bool(z % 2 == self.polar):
+                    outout.append(noom[z] * (q * self.velocity))
+                else:
+                    outout.append(noom[z] * (q * self.velocity))
+            
+            outout = self.shift(outout, -1)
+            if bool(self.echo != 2) : outout = Basal.echor(self.ripple, self.echo, outout)
+        
+        else:
+            po = 0
+            if bool(num[len(num) - 1] == '-'): num = num[1:];  po = 1
+            outout = []
+
+            if bool('.' in num):
+                pos = num.index('.')
+                left = num[:pos] ; right = num[pos + 1:]
+                left.reverse()
+
+                for z in range(len(left)) : outout.append(left[z] * z * self.velocity)
+                outout.reverse() ; outout.append('.')                
+                for z in range(len(right)) : outout.append(right[z] * (0 - ((z + 1) * self.velocity)))
+
+            else:
+                for z in range(len(num)) : outout.append(noom[z] * z * self.velocity)
+            
+            outout = self.shift(outout, -1)
+            if bool(self.echo != 2) : outout = Basal.echor(self.ripple, self.echo, outout)
+            if bool(po == 1): return ['-'] + outout
+            else : return outout
 
 
     def expor(num : float, expo : float) -> float:
@@ -366,7 +361,43 @@ class Basal:
             if bool(expo % 2 == 1) : return float(num ** expo)
             else : return abs(float(num ** expo))
         else: return float(num ** expo)
+    
+    def shift(num : list, by : int) -> list:
+        if bool(by == 0) : return num
+        elif bool(by < 0):
+            if bool('.' in num):
+                pos = num.index('.')
+                if bool(abs(by) == (len(num) - 1)) : num.pop(pos) ; return [0, '.'] + num
+                elif bool(abs(by) >= pos) : num.pop(pos) ; return [0, '.'] + [0 for j in range(abs(by) - pos)] + num
+                else:
+                    outout = [] ; l = len(num) - 1 ; num.pop(pos)
+
+                    for z in range(pos + by) : outout.append(num[z])
+                    outout.append('.')
+                    for z in range(l - (pos + by)) : outout.append(num[z + pos + by])
+                    return outout
+            else:
+                if bool(abs(by) == len(num)) : return [0, '.'] + num
+                elif bool(abs(by) > len(num)) : return [0, '.'] + [0 for j in range(abs(by) - len(num))] + num
+                else:
+                    outout = [] ; l = len(num)
+                    for z in range(l + by) : outout.append(num[z])
+                    outout.append('.')
+                    for z in range(abs(by)) : outout.append(num[l + by + z])
+                    return outout
+        else:
+            if bool('.' in num):
+                pos = num.index('.') ; l = len(num) - 1 ; num.pop(pos) ; npos = l - pos
+                if bool(npos == by) : return num
+                elif bool(npos < by) : return num + [0 for j in range(by - npos)]
+                else:
+                    outout = [] ; del l
+                    
+                    for z in range(pos + by) : outout.append(num[z])
+                    outout.append('.')
+                    for z in range(npos + by) : outout.append(num[z + pos + by])
+                    return outout
+            else : return num + [0 for j in range(by)]
 
     def __float__(self) -> float : return self.num_value
     def __str__(self) -> str : return str(self.display + " " + self.number)
-
