@@ -335,12 +335,12 @@ class Basal:
         
         else:
             po = 0
-            if bool(num[len(num) - 1] == '-'): num = num[1:];  po = 1
+            if bool(noom[len(noom) - 1] == '-'): noom = noom[1:];  po = 1
             outout = []
 
-            if bool('.' in num):
-                pos = num.index('.')
-                left = num[:pos] ; right = num[pos + 1:]
+            if bool('.' in noom):
+                pos = noom.index('.')
+                left = noom[:pos] ; right = noom[pos + 1:]
                 left.reverse()
 
                 for z in range(len(left)) : outout.append(left[z] * z * self.velocity)
@@ -348,9 +348,9 @@ class Basal:
                 for z in range(len(right)) : outout.append(right[z] * (0 - ((z + 1) * self.velocity)))
 
             else:
-                for z in range(len(num)) : outout.append(noom[z] * z * self.velocity)
+                for z in range(len(noom)) : outout.append(noom[z] * z * self.velocity)
             
-            outout = self.shift(outout, -1)
+            outout = Basal.shift(outout, -1)
             if bool(self.echo != 2) : outout = Basal.echor(self.ripple, self.echo, outout)
             if bool(po == 1): return ['-'] + outout
             else : return outout
