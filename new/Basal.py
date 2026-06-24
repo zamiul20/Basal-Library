@@ -160,9 +160,7 @@ class Basal:
         
         return outout
     def depolaris(num : list, bass : float, mod : int, velocity : float, accuracy : int | None = 30) -> list:
-        albs = 0
-        
-        x = num ; x.reverse()
+        albs = 0 ; x = num ; x.reverse()
 
         z = 0
         if bool('.' in x) : z = x.index('.') - len(x)
@@ -172,7 +170,7 @@ class Basal:
             if bool(z % 2 != mod):
                 if bool(x[z] != 0):
                     albs += bass ** ((z + 1) * velocity)
-                    albs += (bass - (2 * int(x[z]))) * (bass ** ((z) * velocity))
+                    albs += (bass - (2 * x[z])) * (bass ** (z * velocity))
             z += 1
 
         return Basal.notobasten(Basal.tobasten(num, bass, velocity) + albs, bass, velocity, accuracy)

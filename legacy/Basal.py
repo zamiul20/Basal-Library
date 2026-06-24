@@ -374,13 +374,11 @@ class Basal:
 
             for z in range(l):
                 if bool(noom[z] == '.') : continue
-                q -= 1
-                if bool(z % 2 == self.polar):
-                    outout += noom[z] * Basal.expor(self.base_value, ((q + 1) * self.velocity)) / (q / 1)
-                else:
-                    outout -= noom[z] * Basal.expor(self.base_value, ((q + 1) * self.velocity)) / (q / 1)
+                q -= 1 ; i = 1 + (q * self.velocity)
+                if bool(z % 2 == self.polar):outout += noom[z] * Basal.expor(self.base_value, i) / i
+                else:outout -= noom[z] * Basal.expor(self.base_value, i) / i
 
-            return outout
+            return outout + C
         
         else:
             po = 0
@@ -401,9 +399,9 @@ class Basal:
                 for z in range(len(num)):
                     outout += Basal.expor(self.base_value, ((z + 1) * self.velocity)) * num[z] / (z + 1)
             
-            if bool(po == 0):return outout
-            else: return (0 - outout)
-
+            if bool(po == 0):return outout + C
+            else: return (0 - outout) - C
+            #Not Found
 
     def expor(num : float, expo : float) -> float:
         if bool(abs(num) != num): 
