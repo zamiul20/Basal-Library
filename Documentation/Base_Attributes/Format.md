@@ -11,6 +11,4 @@ Discrete:
 
 The number the base is with doesn't need to abide by the rule of bases, but can.
 
-
-
 Note: In the code files, it doesn't matter, but the functions give 'Regular' outputs for converting.
