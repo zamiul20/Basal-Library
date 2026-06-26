@@ -1,1 +1,3 @@
-This is the folder I will make files explaining how basal would work in maths, along with other stuff about basal.
+Basal mainly exists to make complex maths better to understand, and add a few graphs that were not possible before.
+
+All of this originated from an encryption project I started, where I found that the function that I used could not be replicated by any other function in maths (without domains / ranges, but that wouldn't make the function continuous), to which (to mathematically verify this encryption) I started making Python and C++ code to explain and then start making rules, fundementals and documentation for this concept of maths I wish to publish.
