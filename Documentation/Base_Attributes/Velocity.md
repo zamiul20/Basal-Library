@@ -14,3 +14,6 @@ If the velocity were different, the number could still have the same value, but 
 10501 =  1x10^2 + 0x10^1.5 + 5x10^1  +  0x10^0.5 + 1x10^0
 
 The change of the number that 10 is exponentiated by is +0.5 - the velocity is +0.5.
+
+
+A negative velocity would flip the number around the decimal point.
