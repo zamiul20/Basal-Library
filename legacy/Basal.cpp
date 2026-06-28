@@ -123,7 +123,7 @@ public:
             bass = 1 / bass; statis = 1;
         }
 
-        int ceil = (1 + floor(logbas(num, pow(bass, velocity))));
+        int ceil = (1 + floor(logbas(abs(num), pow(bass, velocity))));
         string outout = "";
 
         for (int z = 0; z < ceil; z++)

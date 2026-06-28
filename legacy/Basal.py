@@ -155,7 +155,7 @@ class Basal:
         statis = 0
         if bool(bass < 1) : bass = 1 / bass; statis = 1
 
-        ceil = int(1 + (log(num, (bass ** velocity)) // 1))
+        ceil = int(1 + (log(abs(num), (bass ** velocity)) // 1))
         outout = ''
 
         for z in range(ceil):
