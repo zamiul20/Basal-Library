@@ -1,8 +1,8 @@
 Types of bases in basal.
 
 1. Regular
-2. Fractal  : Model 1,
-            : Model 2
+2. Fractal: Model 1,
+            Model 2
 3. ONE
 
 Regular Type:
@@ -22,3 +22,5 @@ A non-integer base value where [b] is the base and satisfies the equation (0 < b
 ONE:
 
 Base is 1. Note: best used with discretion (See Format.md).
+
+0 cannot be a base, muliplying by 0 can only get 0.
