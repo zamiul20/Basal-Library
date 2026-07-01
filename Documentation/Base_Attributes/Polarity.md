@@ -20,4 +20,10 @@ As a result, every other index from the position '0' is negative, and every othe
 
 Machined Negative:
 
-Every index's polarity (- / +) is given if the index is a term in a given equation (nth-term), with every other index being the opposite polarity.
+Positive bias:
+
+Every index's polarity is positive if the index is a term in a given equation (nth-term), with every other index being negative.
+
+Positive bias:
+
+Every index's polarity is negative if the index is a term in a given equation (nth-term), with every other index being positive.
