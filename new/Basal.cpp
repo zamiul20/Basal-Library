@@ -169,7 +169,7 @@ public:
             if (statis == 0)
                 return outout;
             else
-                outout.emplace_back(0); outout.emplace_back('.'); reverse(outout.begin(), outout.end());  return outout;
+                outout.emplace_back(0); outout.emplace_back('.'); reverse(outout.begin(), outout.end()); return outout;
         }
         outout.emplace_back('.');
 
