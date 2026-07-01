@@ -1,4 +1,4 @@
-Formats of bases in basal.
+# Formats of bases
 
 1. Regular
 2. Discrete

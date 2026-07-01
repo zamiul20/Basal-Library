@@ -1,4 +1,4 @@
-Polarities of bases in basal.
+# Polarities of bases
 
 1. Regular
 2. Negative

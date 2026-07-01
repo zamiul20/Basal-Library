@@ -1,4 +1,4 @@
-Types of bases in basal.
+# Types of bases
 
 1. Regular
 2. Fractal: Model 1,

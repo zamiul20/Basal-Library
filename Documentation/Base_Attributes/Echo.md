@@ -1,4 +1,4 @@
-Echo variants of bases in basal.
+# Echo variants of bases
 
 1. None
 2. Positive : +r,
