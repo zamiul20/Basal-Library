@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("This is a calculator for the Basal branch of Mathematics")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+406c434db3a67265a1553e0ed9ed9e38401ad936")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ed2924f947f90d22bed7f868d2273c32b11dbb59")]
 [assembly: System.Reflection.AssemblyProductAttribute("Basal Calculator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Calculator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
