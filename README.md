@@ -7,4 +7,4 @@ The C++ version is for ROCm and should be able to run in any operating system, b
 
     The directories 'list_syntax' and 'word_syntax' are libraries that use different syntaxes for their calculations, as well as input and output.
 
-There is a directory 'other_code' for code related to Basal, but is the core module.
+There is a directory 'other_code' for code related to Basal, but is not the core module.
