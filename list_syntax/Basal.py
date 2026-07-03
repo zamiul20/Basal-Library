@@ -313,46 +313,6 @@ class Basal:
 
             if bool(po == 0):return outout
             else: return (0-outout)
-    def disintegrate_t(self, noom : list) -> list:
-        if bool(self.echo != 2) : noom = Basal.unechor(self.ripple, noom, self.echo)
-        
-        if bool(self.polar != 2):
-            outout = [] ; l = len(noom) ; q = l - 2
-            if bool('.' in noom) : q = noom.index('.')
-
-            for z in range(l):
-                if bool(noom[z] == '.') : outout.append('.') ; continue
-                q -= 1
-                if bool(z % 2 == self.polar):
-                    outout.append(noom[z] * (q * self.velocity))
-                else:
-                    outout.append(noom[z] * (q * self.velocity))
-            
-            outout = self.shift(outout, -1)
-            if bool(self.echo != 2) : outout = Basal.echor(self.ripple, self.echo, outout)
-        
-        else:
-            po = 0
-            if bool(noom[len(noom) - 1] == '-'): noom = noom[1:];  po = 1
-            outout = []
-
-            if bool('.' in noom):
-                pos = noom.index('.')
-                left = noom[:pos] ; right = noom[pos + 1:]
-                left.reverse()
-
-                for z in range(len(left)) : outout.append(left[z] * z * self.velocity)
-                outout.reverse() ; outout.append('.')                
-                for z in range(len(right)) : outout.append(right[z] * (0 - ((z + 1) * self.velocity)))
-
-            else:
-                for z in range(len(noom)) : outout.append(noom[z] * z * self.velocity)
-            
-            outout = Basal.shift(outout, -1)
-            if bool(self.echo != 2) : outout = Basal.echor(self.ripple, self.echo, outout)
-            if bool(po == 1): return ['-'] + outout
-            else : return outout
-
 
     def expor(num : float, expo : float) -> float:
         if bool(abs(num) != num): 
