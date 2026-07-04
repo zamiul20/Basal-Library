@@ -2,6 +2,7 @@
 #include <cmath>
 #include <vector>
 #include <variant>
+#include <algorithm>
 
 using namespace std;
 using numbas_model = vector<variant<double, char>>;
@@ -224,7 +225,7 @@ public:
         reverse(num.begin(), num.end());
 
 
-        if (tobe(num, '.' != -1))
+        if (tobe(num, '.') != -1)
             z -= tobe(num, '.');
 
         for (int z_2 = 0; z_2 < num.size(); z_2++)
