@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <typeinfo>
 #include <hip/hip_runtime.h>
 using namespace std;
 using numform = float;
@@ -17,7 +18,7 @@ __global__ void binombas(const numform firbas, const numform secbas, const numfo
 int main() {
     numform firbas, firvel, secbas, secvel;
     int expansion = 1024;
-    cout<<"Script and kernel operates in : "<<typeof(firbas);
+    cout<<"Script and kernel operates in : "<<typeid(firbas).name();
     cout<<"\nType in the first base : ";cin>>firbas;
     cout<<"\nType in the second base : ";cin>>secbas;
     cout<<"\nType in the first base's velocity : ";cin>>firvel;

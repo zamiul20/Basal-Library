@@ -10,8 +10,7 @@ __global__ void polynom(const numform*num, const numform index, const numform mu
     int id = blockIdx.x * blockDim.x + threadIdx.x;
     if (id < n)
     {
-        //outout[id] += pow(num[id], index) * mulpi;
-        outout[id] = id;
+        outout[id] += pow(num[id], index) * mulpi;
     }
 }
 
