@@ -13,10 +13,15 @@ Think of it as a for-loop that includes both inputs and everything in between, b
 All inputs and their meanings:
 ```
  z=s
-  এ i ¦Ffunction(i)¦
+  এ i ¦Ffunction(z)¦
   e
 
 is equal to (in programming languages) :
-(C++ || C# || C) : for (float z = [s]; z <= [e]; z += [i]) {// Add value of Ffunction(i) to the number}
-(Rust) : let mut z = [s]; loop{/* Add value of Ffunction(i) to the number*/ if(z==e){break;}z+=[i];}
+(C++ || C# || C) : for (float z = [s]; z <= [e]; z += [i]) {// Add value of Ffunction(z) to the number}
+(Rust) : let mut z = [s]; loop{/* Add value of Ffunction(z) to the number*/ if(z==e){break;}z+=[z];}
+(Fortran) :
+real :: z
+do z = [s], [e], [i]
+    ! Add value of Ffunction(z) to the number
+end do
 ```
