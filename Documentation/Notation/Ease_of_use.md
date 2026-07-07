@@ -15,9 +15,9 @@ You can set a base as a variable, accessed and defined with `ণ`
 
 Example, use '|' or '¦' to encapsulate:
 ```
-|<16T = <ণ hT|
+|<16T = <ণ ET|
 
 <ণ hT 10 = <10T 16
 
-The letter 'h' can be replased with anything else, apart from just numbers (e.g. bass7 is allowed, 7 isn't).
+The letter 'E' can be replased with anything else, apart from just numbers (e.g. bass7 is allowed, 7 isn't).
 ```
