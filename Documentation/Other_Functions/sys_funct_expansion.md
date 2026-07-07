@@ -17,8 +17,15 @@ All inputs and their meanings:
   e
 
 is equal to (in programming languages) :
+
 (C++ || C# || C) : for (float z = [s]; z <= [e]; z += [i]) {// Add value of Ffunction(z) to the number}
+
 (Rust) : let mut z = [s]; loop{/* Add value of Ffunction(z) to the number*/ if(z==e){break;}z+=[z];}
+
+(Python) : 
+float z = [s]
+while bool(z <= [e]):'''Add value of Ffunction(z) to the number;'''z+=i
+
 (Fortran) :
 real :: z
 do z = [s], [e], [i]
