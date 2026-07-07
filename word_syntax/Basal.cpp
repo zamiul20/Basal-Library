@@ -130,7 +130,7 @@ public:
         {
             double index = pow(bass, ((ceil - (z + 1)) * velocity));
 
-            int t = floor(num / index);
+            double t = floor(num / index);
 
             if (t >= 1)
             {
@@ -156,7 +156,7 @@ public:
 
             double index = pow(bass, ((0 - (z + 1)) * velocity));
 
-            int t = floor(num / index);
+            double t = floor(num / index);
 
             if (t >= 1)
                 num -= t * index;

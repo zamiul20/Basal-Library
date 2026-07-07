@@ -136,7 +136,8 @@ public:
                 outout += pow(bass, (z * velocity)) * get<double>(num[z]);
             }
         }
-
+        
+        if (po == 1)return(0-outout);
         return outout;
     }
     numbas_model notobasten(double num, double bass, double velocity, int accuracy)
@@ -155,7 +156,7 @@ public:
         {
             double index = pow(bass, ((ceil - (z + 1)) * velocity));
 
-            int t = floor(num / index);
+            double t = floor(num / index);
 
             if (t >= 1)
             {
@@ -169,8 +170,7 @@ public:
         {
             if (statis == 0)
                 return outout;
-            else
-                outout.emplace_back(0); outout.emplace_back('.'); reverse(outout.begin(), outout.end()); return outout;
+            else{outout.emplace_back(static_cast<double>(0)); outout.emplace_back('.'); reverse(outout.begin(), outout.end()); return outout;}
         }
         outout.emplace_back('.');
 
@@ -181,7 +181,7 @@ public:
 
             double index = pow(bass, ((0 - (z + 1)) * velocity));
 
-            int t = floor(num / index);
+            double t = floor(num / index);
 
             if (t >= 1)
                 num -= t * index;
@@ -191,8 +191,7 @@ public:
 
         if (statis == 0)
             return outout;
-        else
-            reverse(outout.begin(), outout.end()); return outout;
+        else{reverse(outout.begin(), outout.end()); return outout;}
     }
 
     double polariser(numbas_model num, double bass, int mod, double velocity)
