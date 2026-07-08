@@ -191,12 +191,12 @@ class Basal:
     def polariser(num : str, bass: float, mod : int, velocity : float) -> float:
         outout = float(0)
         l = len(num)
-        q = l - 1
+        q = l
 
         for z in range(l):
             if bool(num[z]   == '.') : continue
             q -= 1
-            if bool(z % 2 == mod):
+            if bool(q % 2 == mod):
                 outout += Basal.Cn(num[z]) * (bass ** (q * velocity))
             else:
                 outout -= Basal.Cn(num[z]) * (bass ** (q * velocity))
@@ -212,11 +212,10 @@ class Basal:
 
         for z_2 in range(len(num)):
             if bool(x[z] == '.') : continue
-            z += 1
             if bool(z % 2 != mod):
                 if bool(x[z] != '0'):
-                    albs += bass ** ((z + 1) * velocity)
-                    albs += (bass - (2 * int(x[z]))) * (bass ** ((z) * velocity))
+                    albs += bass ** ((z + 1) * velocity) + (bass - (2 * int(x[z]))) * (bass ** ((z) * velocity))
+            z += 1
 
         return Basal.notobasten(Basal.tobasten(num, bass, velocity) + albs, bass, velocity, accuracy)
 
