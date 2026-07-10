@@ -86,7 +86,7 @@ namespace Calculator
                 bass = 1 / bass;
             }
 
-            int ceil = (int)(1 + Math.Floor(Math.Log(Math.Abs((double)num), bass * velocity)));
+            int ceil = (int)(1 + Math.Floor(Math.Log(Math.Abs((double)num), expor(bass * velocity))));
             string outout = "";
 
             for (int z = 0; z < ceil; z++)
