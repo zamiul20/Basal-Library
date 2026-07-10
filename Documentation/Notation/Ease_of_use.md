@@ -19,5 +19,5 @@ Example, use '|' or '¦' to encapsulate:
 
 <ণ hT 10 = <10T 16
 
-The letter 'E' can be replased with anything else, apart from just numbers (e.g. bass7 is allowed, 7 isn't).
+The letter 'E' can be replaced with anything else, apart from just numbers (e.g. bass7 is allowed, 7 isn't).
 ```
