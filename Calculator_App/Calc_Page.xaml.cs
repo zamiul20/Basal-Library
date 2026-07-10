@@ -275,7 +275,7 @@ public partial class Calc_Page : ContentPage
         
         if (basar[2].polar != 2) 
             basar[2].number = tmp.depolaris(basar[2].number, basar[2].base_value, basar[2].velocity, basar[2].polar, 69);
-        if (basar[2].ripple != 2) 
+        if (basar[2].echo != 2) 
             basar[2].number = tmp.echor(basar[2].number, basar[2].ripple, basar[2].echo, 0);        
 
         if (po == 0)
