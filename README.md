@@ -13,4 +13,6 @@ The C++ version is for areas where other languages are not as good: ROCm, microc
 
 I will fix the code files (they may not as intended) after clearing up the documentation.
 
+The directory \Calculator_App\bin contains the android app (Android version 10+) for the basal calulator (cannot handle decimals), only integers
+
 There is a directory 'other_code' for code related to Basal, but is not the core module.
