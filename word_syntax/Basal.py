@@ -151,7 +151,7 @@ class Basal:
 
         if bool(po == 0):return outout
         else: return (0-outout)
-    def notobasten(num : int, bass : float, velocity : float | None = 1, accuracy : int | None = 30) -> str:
+    def notobasten(num : float, bass : float, velocity : float | None = 1, accuracy : int | None = 30) -> str:
         statis = 0
         if bool(bass < 1) : bass = 1 / bass; statis = 1
 
