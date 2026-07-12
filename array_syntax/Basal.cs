@@ -199,9 +199,9 @@ namespace Calculator
             try { mid = Array.IndexOf(num, 'জ'); }
             catch { return num; }
 
-            object[] left = new object[] { };
+            object[] left = new object[mid];
             Array.Copy(num, 0, left, 0, mid);
-            object[] right = new object[] { };
+            object[] right = new object[num.Length - (mid + 1)];
             Array.Copy(num, mid + 1, right, 0, num.Length - (mid + 1));
             string fire = "I";
             int rx = right.Length; int rount = rx;
@@ -233,7 +233,7 @@ namespace Calculator
                     {
                         if (lx == 0) break;
 
-                        outout.Add(right[lount - lx]);
+                        outout.Add(left[lount - lx]);
                         lx--;
                     }
                     fire = "I";
@@ -248,9 +248,9 @@ namespace Calculator
             int r = Math.Abs(rip);
             int nlen = num.Length - 1;
 
-            object[] left = new object[] { };
+            object[] left = new object[mid];
             Array.Copy(num, 0, left, 0, mid);
-            object[] right = new object[] { };
+            object[] right = new object[num.Length - (mid + 1)];
             Array.Copy(num, mid + 1, right, 0, num.Length - (mid + 1));
             string fire = "I";
             int rx = right.Length; int rount = rx;
@@ -269,7 +269,7 @@ namespace Calculator
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
-                        if (rx == 0) { break; }
+                        if (rx == 0) break;
 
                         outout.Add(right[rount - rx]);
                         rx--;
@@ -280,9 +280,9 @@ namespace Calculator
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
-                        if (lx == 0) { break; }
+                        if (lx == 0) break;
 
-                        outout.Add(right[lount - lx]);
+                        outout.Add(left[lount - lx]);
                         lx--;
                     }
                     fire = "I";
@@ -483,6 +483,7 @@ namespace Calculator
         public decimal value = 0;
         #endregion
 
+        #region CONSTRUCTORS
         public Basal() { }
 
         public Basal(
@@ -564,6 +565,7 @@ namespace Calculator
                 number = echor(number, echo, rip, 0);
             }
         }
+        #endregion
     }
 
 }
