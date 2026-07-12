@@ -31,13 +31,15 @@ namespace Calculator
 
         #region CONVERT TO AND FROM DENARY
 
-        public decimal tobasten(Array num, double bass, double velocity)
+        public decimal tobasten(object[] num, double bass, double velocity)
         {
             int po = 0;
-            if (num[0] == '-')
+            if ((char)num[0] == '-')
             {
                 po = 1;
-                num = num.Substring(1);
+                object[] temp = new object[] { };
+                Array.Copy(num, 1, temp, 0, num.Length-1);
+                num = temp;
             }
             decimal outout = 0;
             Array.Reverse(num);
@@ -47,22 +49,22 @@ namespace Calculator
                 int pos = Array.IndexOf(num, '.');
                 for (int z = 0; z < num.Length; z++)
                 {
-                    if (num[z] == '.') { pos++; continue; }
-                    outout += (decimal)expor(bass, (z - pos) * velocity) * num[z];
+                    if ((char)num[z] == '.') { pos++; continue; }
+                    outout += (decimal)expor(bass, (z - pos) * velocity) * (decimal)num[z];
                 }
             }
             else
             {
                 for (int z = 0; z < num.Length; z++)
                 {
-                    outout += (decimal)expor(bass, z * velocity) * num[z];
+                    outout += (decimal)expor(bass, z * velocity) * (decimal)num[z];
                 }
             }
 
             if (po == 0) return outout;
             else return 0 - outout;
         }
-        public string notobasten(decimal num, double bass, double velocity, int accuracy)
+        public object[] notobasten(decimal num, double bass, double velocity, int accuracy)
         {
             int statis = 0;
             if (bass < 1)
@@ -71,8 +73,8 @@ namespace Calculator
                 bass = 1 / bass;
             }
 
-            int ceil = (int)(1 + Math.Floor(Math.Log(Math.Abs((double)num), expor(bass * velocity))));
-            object[] outout = {};
+            int ceil = (int)(1 + Math.Floor(Math.Log(Math.Abs((double)num), expor(bass, velocity))));
+            object[] outout = { };
 
             for (int z = 0; z < ceil; z++)
             {
@@ -126,7 +128,7 @@ namespace Calculator
                     outout.Append(t);
                 }
                 if (statis == 0) return outout;
-                else { Array.Reverse(outout); return outout;}
+                else { Array.Reverse(outout); return outout; }
             }
         }
 
@@ -134,50 +136,50 @@ namespace Calculator
 
         #region POLARITY
 
-        public decimal polaris(Array num, double bass, double velocity, int mod)
+        public decimal polaris(object[] num, double bass, double velocity, int mod)
         {
-            decimal outout = 0m;
+            decimal outout = 0M;
             int l = num.Length;
             int q = l;
 
             for (int z = 0; z < l; z++)
             {
-                if (num[z] == '.') continue;
+                if ((char)num[z] == '.') continue;
 
                 q--;
                 if (z % 2 == mod)
                 {
-                    outout += (decimal)(num[z] * expor(bass, (q * velocity)));
+                    outout += (decimal)((double)num[z] * expor(bass, (q * velocity)));
                 }
                 else
                 {
-                    outout -= (decimal)(num[z] * expor(bass, (q * velocity)));
+                    outout -= (decimal)((double)num[z] * expor(bass, (q * velocity)));
                 }
             }
 
             return outout;
         }
-        public string depolaris(Array num, double bass, double velocity, int mod, int accuracy)
+        public object[] depolaris(object[] num, double bass, double velocity, int mod, int accuracy)
         {
             decimal abls = 0;
 
-            string x = revstr(num);
+            Array.Reverse(num);
 
             int z = 0;
-            if (x.Contains('.'))
-                z = x.IndexOf('.') - x.Length;
+            if (-1 != Array.IndexOf(num, '.'))
+                z = Array.IndexOf(num, '.') - num.Length;
 
-            for (int z_2 = 0; z_2 < x.Length; z_2++)
+            for (int z_2 = 0; z_2 < num.Length; z_2++)
             {
-                if (x[z_2] == '.') continue;
+                if ((char)num[z_2] == '.') continue;
 
                 z += 1;
                 if (z % 2 == mod)
                 {
-                    if (x[z_2] != '0')
+                    if ((char)num[z_2] != '0')
                     {
                         abls += (decimal)expor(bass, (z + 1) * velocity);
-                        abls += (decimal)(bass - (2 * Cc(x[z_2])) * expor(bass, z * velocity));
+                        abls += (decimal)(bass - (2 * (double)num[z_2]) * expor(bass, z * velocity));
                     }
                 }
             }
@@ -188,20 +190,22 @@ namespace Calculator
 
         #region ECHO
 
-        public Array unechor(int rip, Array num, int mode)
+        public object[] unechor(int rip, object[] num, int mode)
         {
-            object[] outout = {};
+            List<object> outout = new List<object> { };
             int r = Math.Abs(rip);
             int nlen = num.Length - 1; int mid;
 
-            try { mid = num.IndexOf('জ'); }
-            catch { return "Error"; }
+            try { mid = Array.IndexOf(num, 'জ'); }
+            catch { return num; }
 
-            object[] left = new ArraySegment(num, 0, mid);
-            object[] right = new ArraySegment(num, mid + 1, num.Length - (mid + 1));
+            object[] left = new object[] { };
+            Array.Copy(num, 0, left, 0, mid);
+            object[] right = new object[] { };
+            Array.Copy(num, mid + 1, right, 0, num.Length - (mid + 1));
             string fire = "I";
             int rx = right.Length; int rount = rx;
-            int lx = left.Length;int lount = lx;
+            int lx = left.Length; int lount = lx;
 
             if (rip > 0)
                 Array.Reverse(left);
@@ -218,7 +222,7 @@ namespace Calculator
                     {
                         if (rx == 0) break;
 
-                        outout.Append(right[rount - rx]);
+                        outout.Add(right[rount - rx]);
                         rx--;
                     }
                     fire = "780";
@@ -229,23 +233,25 @@ namespace Calculator
                     {
                         if (lx == 0) break;
 
-                        outout.Append(right[lount - lx]);
+                        outout.Add(right[lount - lx]);
                         lx--;
                     }
                     fire = "I";
                 }
             }
 
-            return outout;
+            return outout.ToArray();
         }
-        public Array unechor(int rip, Array num, int mode, int mid)
+        public object[] unechor(int rip, object[] num, int mode, int mid)
         {
-            object[] outout = {};
+            List<object> outout = new List<object> { };
             int r = Math.Abs(rip);
             int nlen = num.Length - 1;
 
-            object[] left = new ArraySegment(num, 0, mid);
-            object[] right = new ArraySegment(num, mid + 1, num.Length - (mid + 1));
+            object[] left = new object[] { };
+            Array.Copy(num, 0, left, 0, mid);
+            object[] right = new object[] { };
+            Array.Copy(num, mid + 1, right, 0, num.Length - (mid + 1));
             string fire = "I";
             int rx = right.Length; int rount = rx;
             int lx = left.Length; int lount = lx;
@@ -265,7 +271,7 @@ namespace Calculator
                     {
                         if (rx == 0) { break; }
 
-                        outout.Append(right[rount - rx]);
+                        outout.Add(right[rount - rx]);
                         rx--;
                     }
                     fire = "780";
@@ -276,23 +282,23 @@ namespace Calculator
                     {
                         if (lx == 0) { break; }
 
-                        outout.Append(right[lount - lx]);
+                        outout.Add(right[lount - lx]);
                         lx--;
                     }
                     fire = "I";
                 }
             }
 
-            return outout;
+            return outout.ToArray();
         }
-        public Array echor(string num, int mode, int rip, int uni)
+        public object[] echor(object[] num, int mode, int rip, int uni)
         {
             int ripl = Math.Abs(rip);
-            object[] left_arr = {};
-            object[] right_arr = {};
+            List<object> left_arr = new List<object> { };
+            List<object> right_arr = new List<object> { };
             int x = num.Length;
             int count = x;
-            char fire = 'I';
+            string fire = "I";
             char[]? placehold = ['জ'];
 
             if (uni == 1)
@@ -302,58 +308,54 @@ namespace Calculator
             {
                 if (fire == "780") { fire = "I"; }
                 else if (fire == "I") { fire = "780"; }
-                else { return "How?"; }
+                else { return ["How?"]; }
 
                 for (int z = 0; z < ripl; z++)
                 {
                     if (fire == "I")
                     {
                         if (x == 0) break;
-                        else
-                        {
-                            left_arr.Append(num[count - x]);
-                        }
+                        else left_arr.Add(num[count - x]);
                     }
 
                     else if (fire == "780")
                     {
                         if (x == 0) break;
-                        else
-                        {
-                            right_arr.Append(num[count - x]);
-                        }
+                        else right_arr.Add(num[count - x]);
                     }
                     x--;
                 }
                 if (x == 0) { break; }
             }
-            
-            Array.Reverse(left_arr);
-            object[] outout = {};
+
+            left_arr.Reverse();
+            object[] outout = new object[] { };
 
             if (mode == 0)
             {
                 if (rip < 0)
                 {
-                    Array.Reverse(left_arr);
-                    Array.Reverse(right_arr);
+                    left_arr.Reverse();
+                    right_arr.Reverse();
                 }
-                if (uni == 0) left_arr.Append('জ');
-                else if (uni == 1) left_arr.Append('&');
+                if (uni == 0) left_arr.Add('জ');
+                else if (uni == 1) left_arr.Add('&');
 
-                outout = left_arr.Concat(right_arr);
+                left_arr.AddRange(right_arr);
+                outout = left_arr.ToArray();
             }
             else
             {
                 if (rip < 0)
                 {
-                    Array.Reverse(left_arr);
-                    Array.Reverse(right_arr);
+                    left_arr.Reverse();
+                    right_arr.Reverse();
                 }
-                if (uni == 0) right_arr.Append('জ');
-                else if (uni == 1) right_arr.Append('&');
+                if (uni == 0) right_arr.Add('জ');
+                else if (uni == 1) right_arr.Add('&');
 
-                outout = right_arr.Concat(left_arr);
+                right_arr.AddRange(left_arr);
+                outout = right_arr.ToArray();
             }
 
             return outout;
@@ -406,46 +408,52 @@ namespace Calculator
         #endregion
 
         #region CALCULUS
- 
-        public decimal disintegrate(Array num, Basal inbas)
+
+        public decimal disintegrate(object[] num, Basal inbas)
         {
             if (inbas.echo != 2) { num = inbas.unechor(inbas.ripple, num, inbas.echo); }
 
             if (inbas.polar != 2)
             {
-                decimal outout = 0M ; int l = num.Length ; int q = l - 2;
+                decimal outout = 0M; int l = num.Length; int q = l - 2;
 
                 for (int z = 0; z < l; z++)
                 {
-                    if (num[z] == '.') { continue ;}
+                    if ((char)num[z] == '.') { continue; }
                     q--;
                     if (z % 2 == inbas.polar)
-                        outout += num[z] * expor(inbas.base_value, (q - 1) * inbas.velocity) * q;
+                        outout += (decimal)((double)num[z] * expor(inbas.base_value, (q - 1) * inbas.velocity) * q);
                     else
-                        outout += num[z] * expor(inbas.base_value, (q - 1) * inbas.velocity) * q;
+                        outout += (decimal)((double)num[z] * expor(inbas.base_value, (q - 1) * inbas.velocity) * q);
                 }
                 return outout;
             }
             else
             {
-                po = 0;
-                if (num[0] == '-') { num = new ArraySegment(num, 1, num.Length - 1) ; po = 1; }
-                decimal outout = 0M; Array.Reverse(num); 
+                int po = 0;
+                if ((char)num[0] == '-')
+                {
+                    po = 1;
+                    object[] temp = new object[] { };
+                    Array.Copy(num, 1, temp, 0, num.Length - 1);
+                    num = temp;
+                }
+                decimal outout = 0M; Array.Reverse(num);
 
                 if (num.Contains('.'))
                 {
                     int pos = Array.IndexOf(num, '.');
                     for (int z = 0; z < num.Length; z++)
                     {
-                        if (num[z] == '.') { pos++; continue; }
-                        outout += (decimal)expor(bass, (z - pos - 1) * velocity) * num[z] * z;
+                        if ((char)num[z] == '.') { pos++; continue; }
+                        outout += (decimal)expor(inbas.base_value, (z - pos - 1) * inbas.velocity) * (decimal)num[z] * z;
                     }
                 }
                 else
                 {
                     for (int z = 0; z < num.Length; z++)
                     {
-                        outout += (decimal)expor(bass, (z - 1) * velocity) * num[z] * z;
+                        outout += (decimal)expor(inbas.base_value, (z - 1) * inbas.velocity) * (decimal)num[z] * z;
                     }
                 }
 
@@ -471,7 +479,7 @@ namespace Calculator
 
         public string? display = "<10T";
 
-        public object[] number = {'0'};
+        public object[] number = { '0' };
         public decimal value = 0;
         #endregion
 
@@ -557,4 +565,5 @@ namespace Calculator
             }
         }
     }
+
 }
