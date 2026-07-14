@@ -20,7 +20,7 @@ is equal to (in programming languages) :
 
 (C++ || C# || C) : for (float z = [s]; z <= [e]; z += [i]) {// Add value of Ffunction(z) to the number}
 
-(Rust) : let mut z = [s]; loop{/* Add value of Ffunction(z) to the number*/ if(z==e){break;}z+=[z];}
+(Rust) : let mut k = [s]; loop{/* Add value of Ffunction(k) to the number*/ if(k<=e){break;}k+=[i];}
 
 (Python) : 
 float z = [s]
