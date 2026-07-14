@@ -19,12 +19,12 @@ Converting from a normal number to have a positive echo with a ripple of +3 - `<
 
 I'll use the digit order as the number with word syntax, so it is easier to track
 
-9876543210
+98765.3210
 
 Separate the digits into batches of 3 starting from the lowest index to the highest - (the ripple)
 The decimal point is treated as its own digit (if there is one)
 
-9 876 543 210
+9 876 5.3 210
 
 Separate the batches into 2 regions
 
@@ -33,18 +33,18 @@ If the echo type is negative, every other batch from the furthest to the left ge
 
 Then the two rows are grouped to its contents
 
-9543
+95.3
 876210
 
 If the ripple's value is greater than 0, reverse the order of digits of the lower row
 If the ripple's value is less than 0, reverse the order of digits of the upper row
 
-9543
+95.3
 012678
 
 Attach / concatenate the top row to the bottom with `জ` in the middle, to signify where the ripple originates from
 
-<R+ল+3T 9543জ012678 = <R+ল+3T 9, 5, 4, 3, জ, 0, 1, 2, 6, 7, 8 = 9876543210
+<R+ল+3T 95.3জ012678 = <R+ল+3T 9, 5, ., 3, জ, 0, 1, 2, 6, 7, 8 = 98765.3210
 
 
 ```
