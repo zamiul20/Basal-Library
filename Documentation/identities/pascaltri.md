@@ -7,5 +7,3 @@ For any binomial expansion of 2 numbers `q` and `i` with the exponent `r`:
          r
 ```
 The character '<' is still supposed to have a line above it
-
-
