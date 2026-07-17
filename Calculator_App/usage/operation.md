@@ -2,7 +2,7 @@
 
 Buttons and what they do:
 
-With this version of the Basal Calculator, use ascending notation only and array syntax, with the separator as a space e.g. < 10 T 5 0 3 being five hundred and 3.
+With this version of the Basal Calculator, use ascending notation only and array syntax, with the separator as a space e.g. '< 10 T 5 0 3' being five hundred and 3.
 Note : The only exception being the expander, where it requires bases facing both sides.
 
 First Base : Selects the first number's base to edit, default is < 10 T
