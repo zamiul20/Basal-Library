@@ -28,7 +28,7 @@ class Basal:
         self.base_value = bass
         self.display = Basal.ct_disp(self)
 
-    def Conv(self, num : int) -> list:
+    def Conv(self, num : float) -> list:
         outout = []
 
         if bool(self.base_value == 1) : return ValueError
