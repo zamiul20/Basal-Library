@@ -16,3 +16,17 @@ Answer number : Selects the answer's number to edit to perform calculations on, 
 The buttons at the bottom of the menu are the symbols to add the attributes or the midpoint for the ripple, they insert the character at the end of the text.
 
 The button that reads 'set' sets the value of what is in the textbox, which will need to be done before selecting another parameter or sending the numbers to be calculated
+
+The operations clicked are what you perform on the 2 numbers (have to be set beforehand).
+
+All available operations:
+1. Addition
+2. Subtraction
+3. Multiplication
+4. Division
+5. Exponentiation
+6. a x (e ^ b)
+7. Conversion
+8. Differentiation
+9. Fabrication by basal polynomial
+10. Expansion
