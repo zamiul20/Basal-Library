@@ -68,7 +68,7 @@ class Basal:
             else:
                 self.num_value = Basal.tobasten(num, bass, vel)'''
 
-    def Conv(self, num : int) -> str:
+    def Conv(self, num : float) -> str:
         outout = ''
 
         if bool(self.base_value == 1) : return ValueError
