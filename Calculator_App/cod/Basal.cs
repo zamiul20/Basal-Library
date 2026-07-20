@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Calculator
+﻿namespace Calculator
 {
     internal class Basal
     {
@@ -25,58 +21,46 @@ namespace Calculator
                 return (Math.Pow(num, expo));
             }
         }
-        public static string revstr(string stringInput)
-        {
-            char[] charArray = stringInput.ToCharArray();
-            Array.Reverse(charArray);
-            return new string(charArray);
-        }
-
-        public static int Cc(char n) { return (int)n - 48; }
-        public static char Vc(int n) { return (char)(n + 48); }
 
         #endregion
 
         #region CONVERT TO AND FROM DENARY
 
-        public decimal tobasten(string num, double bass, double velocity)
+        public double tobasten(object[] num, double bass, double velocity)
         {
-            int po = 0;
-            if (num[0] == '-')
+            int po = 0; char res = 'I';
+            Char.TryParse(num[0].ToString(), out res);
+
+            if (res == '-')
             {
                 po = 1;
-                num = num.Substring(1);
+                object[] temp = new object[] { };
+                Array.Copy(num, 1, temp, 0, num.Length - 1);
+                num = temp;
             }
-            decimal outout = 0;
-            num = revstr(num);
+            double outout = 0d;
 
             if (num.Contains('.'))
             {
-                int pos = num.IndexOf('.');
-                string left = num.Substring(0, pos);
-                string right = num.Substring(pos + 1);
-
-                for (int z = 0; z < left.Length; z++)
+                int pos = Array.IndexOf(num, '.');
+                for (int z = 0; z < num.Length; z++)
                 {
-                    outout += (decimal)expor(bass, (z * velocity)) * Cc(left[z]);
-                }
-                for (int z = 0; z < right.Length; z++)
-                {
-                    outout += (decimal)expor(bass, ((z + 1) * velocity)) * Cc(right[z]);
+                    if (Object.Equals(num[z], '.')) { pos++; continue; }
+                    outout += expor(bass, (z - pos) * velocity) * Convert.ToDouble(num[z]);
                 }
             }
             else
             {
                 for (int z = 0; z < num.Length; z++)
                 {
-                    outout += (decimal)expor(bass, (z * velocity)) * Cc(num[z]);
+                    outout += expor(bass, z * velocity) * Convert.ToDouble(num[z]);
                 }
             }
 
             if (po == 0) return outout;
             else return 0 - outout;
         }
-        public string notobasten(decimal num, double bass, double velocity, int accuracy)
+        public object[] notobasten(double num, double bass, double velocity, int accuracy)
         {
             int statis = 0;
             if (bass < 1)
@@ -85,42 +69,47 @@ namespace Calculator
                 bass = 1 / bass;
             }
 
-            int ceil = (int)(1 + Math.Floor(Math.Log((double)num, expor(bass, velocity))));
-            string outout = "";
+            int ceil = (int)(1 + Math.Floor(Math.Log(Math.Abs(Convert.ToDouble(num)), expor(bass, velocity))));
+            List<object> outout = new List<object> { };
 
             for (int z = 0; z < ceil; z++)
             {
                 int q = ceil - (z + 1);
-                decimal index = (decimal)expor(bass, (q * velocity));
+                double index = expor(bass, (q * velocity));
 
                 int t = (int)(Math.Floor(num / index));
 
                 if (t >= 1)
                 {
-                    num -= (t * index);
+                    num -= t * index;
                 }
-                outout += Vc(t);
+                outout.Add(t);
             }
 
             if (num == 0)
             {
-                if (statis == 0) return outout;
-                else return $"0.{revstr(outout)}";
+                if (statis == 0) return outout.ToArray<object>();
+                else
+                {
+                    object[] x = outout.ToArray<object>();
+                    Array.Reverse(x);
+                    return x;
+                }
             }
             else
             {
-                outout += '.';
+                outout.Add('.');
 
                 for (int z = 0; z < (accuracy - ceil); z++)
                 {
                     if (num == 0)
                     {
-                        return outout;
+                        return outout.ToArray<object>();
                     }
-                    decimal index = 1M;
+                    double index = 1d;
                     try
                     {
-                        index = (decimal)expor(bass, (0 - (z + 1)) * velocity);
+                        index = expor(bass, (0 - (z + 1)) * velocity);
                     }
                     catch
                     {
@@ -131,12 +120,12 @@ namespace Calculator
 
                     if (t >= 1)
                     {
-                        num -= (t * index);
+                        num -= t * index;
                     }
-                    outout += Vc(t);
+                    outout.Add(t);
                 }
-                if (statis == 0) return outout;
-                else return revstr(outout);
+                if (statis == 0) return outout.ToArray<object>();
+                else { object[] x = outout.ToArray<object>(); Array.Reverse(x); return x; }
             }
         }
 
@@ -144,50 +133,48 @@ namespace Calculator
 
         #region POLARITY
 
-        public decimal polaris(string num, double bass, double velocity, int mod)
+        public double polaris(object[] num, double bass, double velocity, int mod)
         {
-            decimal outout = 0m;
+            double outout = 0d;
             int l = num.Length;
             int q = l;
 
             for (int z = 0; z < l; z++)
             {
-                if (num[z] == '.') continue;
-
+                if (Object.Equals('.', num[z])) continue;
                 q--;
                 if (z % 2 == mod)
                 {
-                    outout += (decimal)(Cc(num[z]) * expor(bass, (q * velocity)));
+                    outout += Convert.ToDouble(num[z]) * expor(bass, (q * velocity));
                 }
                 else
                 {
-                    outout -= (decimal)(Cc(num[z]) * expor(bass, (q * velocity)));
+                    outout -= Convert.ToDouble(num[z]) * expor(bass, (q * velocity));
                 }
             }
 
             return outout;
         }
-        public string depolaris(string num, double bass, double velocity, int mod, int accuracy)
+        public object[] depolaris(object[] num, double bass, double velocity, int mod, int accuracy)
         {
-            decimal abls = 0;
+            double abls = 0;
 
-            string x = revstr(num);
+            Array.Reverse(num);
 
             int z = 0;
-            if (x.Contains('.'))
-                z = x.IndexOf('.') - x.Length;
+            if (-1 != Array.IndexOf(num, '.')) z = Array.IndexOf(num, '.') - num.Length;
 
-            for (int z_2 = 0; z_2 < x.Length; z_2++)
+            for (int z_2 = 0; z_2 < num.Length; z_2++)
             {
-                if (x[z_2] == '.') continue;
+                if ((char)num[z_2] == '.') continue;
 
                 z += 1;
                 if (z % 2 == mod)
                 {
-                    if (x[z_2] != '0')
+                    if ((char)num[z_2] != '0')
                     {
-                        abls += (decimal)expor(bass, (z + 1) * velocity);
-                        abls += (decimal)(bass - (2 * Cc(x[z_2])) * expor(bass, z * velocity));
+                        abls += expor(bass, (z + 1) * velocity);
+                        abls += bass - (2 * Convert.ToDouble(num[z_2]) * expor(bass, z * velocity));
                     }
                 }
             }
@@ -198,33 +185,29 @@ namespace Calculator
 
         #region ECHO
 
-        public string unechor(int rip, string num, int mode)
+        public object[] unechor(int rip, object[] num, int mode)
         {
-            string outout = "";
+            List<object> outout = new List<object> { };
             int r = Math.Abs(rip);
             int nlen = num.Length - 1; int mid;
 
-            try { mid = num.IndexOf('জ'); }
-            catch { return "Error"; }
+            try { mid = Array.IndexOf(num, 'জ'); }
+            catch { return num; }
 
-            string left = num.Substring(0, mid);
-            string right = num.Substring(mid + 1);
+            object[] left = new object[mid];
+            Array.Copy(num, 0, left, 0, mid);
+            object[] right = new object[num.Length - (mid + 1)];
+            Array.Copy(num, mid + 1, right, 0, num.Length - (mid + 1));
             string fire = "I";
-            int rx = right.Length;
-            int lx = left.Length;
-            int rount = rx;
-            int lount = lx;
+            int rx = right.Length; int rount = rx;
+            int lx = left.Length; int lount = lx;
 
             if (rip > 0)
-            {
-                left = revstr(left);
-            }
+                Array.Reverse(left);
             else
-            {
-                right = revstr(right);
-            }
+                Array.Reverse(right);
 
-            if (mode == 1) { fire = "780"; }
+            if (mode == 1) fire = "780";
 
             for (int z = 0; z < nlen; z++)
             {
@@ -232,9 +215,9 @@ namespace Calculator
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
-                        if (rx == 0) { break; }
+                        if (rx == 0) break;
 
-                        outout = $"{outout}{right[(rount - rx)]}";
+                        outout.Add(right[rount - rx]);
                         rx--;
                     }
                     fire = "780";
@@ -243,91 +226,192 @@ namespace Calculator
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
-                        if (lx == 0) { break; }
+                        if (lx == 0) break;
 
-                        outout = $"{outout}{right[(lount - lx)]}";
+                        outout.Add(left[lount - lx]);
                         lx--;
                     }
                     fire = "I";
                 }
             }
 
-            return outout;
+            return outout.ToArray();
         }
-        public string echor(string num, int mode, int rip, int uni)
+        public object[] unechor(int rip, object[] num, int mode, int mid)
+        {
+            List<object> outout = new List<object> { };
+            int r = Math.Abs(rip);
+            int nlen = num.Length - 1;
+
+            object[] left = new object[mid];
+            Array.Copy(num, 0, left, 0, mid);
+            object[] right = new object[num.Length - (mid + 1)];
+            Array.Copy(num, mid + 1, right, 0, num.Length - (mid + 1));
+            string fire = "I";
+            int rx = right.Length; int rount = rx;
+            int lx = left.Length; int lount = lx;
+
+            if (rip > 0)
+                Array.Reverse(left);
+            else
+                Array.Reverse(right);
+
+            if (mode == 1) fire = "780";
+
+            for (int z = 0; z < nlen; z++)
+            {
+                if (fire == "I")
+                {
+                    for (int z_2 = 0; z_2 < r; z_2++)
+                    {
+                        if (rx == 0) break;
+
+                        outout.Add(right[rount - rx]);
+                        rx--;
+                    }
+                    fire = "780";
+                }
+                else if (fire == "780")
+                {
+                    for (int z_2 = 0; z_2 < r; z_2++)
+                    {
+                        if (lx == 0) break;
+
+                        outout.Add(left[lount - lx]);
+                        lx--;
+                    }
+                    fire = "I";
+                }
+            }
+
+            return outout.ToArray();
+        }
+        public object[] echor(object[] num, int mode, int rip, int uni)
         {
             int ripl = Math.Abs(rip);
-            string left_arr = "";
-            string right_arr = "";
+            List<object> left_arr = new List<object> { };
+            List<object> right_arr = new List<object> { };
             int x = num.Length;
             int count = x;
             string fire = "I";
-            string placehold = "জ";
-
-            if (uni == 1)
-            {
-                placehold = "&";
-            }
-            else if (uni == 2)
-            {
-                placehold = "";
-            }
 
             while (x >= 0)
             {
                 if (fire == "780") { fire = "I"; }
                 else if (fire == "I") { fire = "780"; }
-                else { return "Error"; }
+                else { return ["How?"]; }
 
                 for (int z = 0; z < ripl; z++)
                 {
                     if (fire == "I")
                     {
-
-                        if (x == 0) { break; }
-                        else
-                        {
-                            left_arr = $"{num[count - x]}{left_arr}";
-                        }
+                        if (x == 0) break;
+                        else left_arr.Add(num[count - x]);
                     }
 
                     else if (fire == "780")
                     {
-
-                        if (x == 0) { break; }
-                        else
-                        {
-                            right_arr = $"{right_arr}{num[count - x]}";
-                        }
+                        if (x == 0) break;
+                        else right_arr.Add(num[count - x]);
                     }
                     x--;
                 }
                 if (x == 0) { break; }
             }
 
-            string outout = "";
+            left_arr.Reverse();
+            object[] outout = new object[] { };
 
             if (mode == 0)
             {
-                if (rip > 0)
+                if (rip < 0)
                 {
-                    outout = $"{left_arr}{placehold}{right_arr}";
+                    left_arr.Reverse();
+                    right_arr.Reverse();
                 }
-                else
-                {
-                    outout = $"{revstr(left_arr)}{placehold}{revstr(right_arr)}";
-                }
+                if (uni == 0) left_arr.Add('জ');
+                else if (uni == 1) left_arr.Add('&');
+
+                left_arr.AddRange(right_arr);
+                outout = left_arr.ToArray();
             }
             else
             {
-                if (rip > 0)
+                if (rip < 0)
                 {
-                    outout = $"{right_arr}{placehold}{left_arr}";
+                    left_arr.Reverse();
+                    right_arr.Reverse();
                 }
-                else
+                if (uni == 0) right_arr.Add('জ');
+                else if (uni == 1) right_arr.Add('&');
+
+                right_arr.AddRange(left_arr);
+                outout = right_arr.ToArray();
+            }
+
+            return outout;
+        }
+        public int[] echor(int[] num, int mode, int rip, int uni)
+        {
+            int ripl = Math.Abs(rip);
+            List<int> left_arr = new List<int> { };
+            List<int> right_arr = new List<int> { };
+            int x = num.Length;
+            int count = x;
+            string fire = "I";
+
+            while (x >= 0)
+            {
+                if (fire == "780") { fire = "I"; }
+                else if (fire == "I") { fire = "780"; }
+                else { return [0]; }
+
+                for (int z = 0; z < ripl; z++)
                 {
-                    outout = $"{revstr(right_arr)}{placehold}{revstr(left_arr)}";
+                    if (fire == "I")
+                    {
+                        if (x == 0) break;
+                        else left_arr.Add(num[count - x]);
+                    }
+
+                    else if (fire == "780")
+                    {
+                        if (x == 0) break;
+                        else right_arr.Add(num[count - x]);
+                    }
+                    x--;
                 }
+                if (x == 0) { break; }
+            }
+
+            left_arr.Reverse();
+            int[] outout = new int[] { };
+
+            if (mode == 0)
+            {
+                if (rip < 0)
+                {
+                    left_arr.Reverse();
+                    right_arr.Reverse();
+                }
+                if (uni == 0) left_arr.Add('জ');
+                else if (uni == 1) left_arr.Add('&');
+
+                left_arr.AddRange(right_arr);
+                outout = left_arr.ToArray();
+            }
+            else
+            {
+                if (rip < 0)
+                {
+                    left_arr.Reverse();
+                    right_arr.Reverse();
+                }
+                if (uni == 0) right_arr.Add('জ');
+                else if (uni == 1) right_arr.Add('&');
+
+                right_arr.AddRange(left_arr);
+                outout = right_arr.ToArray();
             }
 
             return outout;
@@ -362,7 +446,7 @@ namespace Calculator
                 {
                     outout += $"+ল{ripple}";
                 }
-                if (echo == 1)
+                else if (echo == 1)
                 {
                     outout += $"-ল{ripple}";
                 }
@@ -375,6 +459,178 @@ namespace Calculator
             display = outout + "T";
 
             return display;
+        }
+        public string? bisp()
+        {
+            string outout = "T";
+
+            if (velocity != 1)
+            {
+                outout += $"স{velocity}";
+            }
+
+            if (echo != 2)
+            {
+                if (echo == 0)
+                {
+                    outout += $"+ল{ripple}";
+                }
+                else if (echo == 1)
+                {
+                    outout += $"-ল{ripple}";
+                }
+            }
+
+            if (discretion != 0)
+            {
+                outout += "গ";
+            }
+
+            if (polar != 2)
+            {
+                if (polar == 0)
+                {
+                    outout += "ঋ";
+                }
+                else if (polar == 1)
+                {
+                    outout += "দ";
+                }
+            }
+
+            bisplay = outout + $"{base_value}>";
+
+            return bisplay;
+        }
+
+        #endregion
+
+        #region CALCULUS
+
+        public double disintegrate(object[] num, Basal inbas)
+        {
+            if (inbas.echo != 2) { num = inbas.unechor(inbas.ripple, num, inbas.echo); }
+
+            if (inbas.polar != 2)
+            {
+                double outout = 0d; int l = num.Length; int q = l - 2;
+
+                for (int z = 0; z < l; z++)
+                {
+                    try { if ((char)num[z] == '.') { continue; } }
+                    catch
+                    {
+                        q--;
+                        if (z % 2 == inbas.polar)
+                            outout += (Convert.ToDouble(num[z]) * expor(inbas.base_value, (q - 1) * inbas.velocity) * q);
+                        else
+                            outout += (Convert.ToDouble(num[z]) * expor(inbas.base_value, (q - 1) * inbas.velocity) * q);
+                    }
+                }
+                return outout;
+            }
+            else
+            {
+                int po = 0; char res = 'I';
+                Char.TryParse(num[0].ToString(), out res);
+
+                if (res == '-')
+                {
+                    po = 1;
+                    object[] temp = new object[] { };
+                    Array.Copy(num, 1, temp, 0, num.Length - 1);
+                    num = temp;
+                }
+                double outout = 0d; Array.Reverse(num);
+
+                if (num.Contains('.'))
+                {
+                    int pos = Array.IndexOf(num, '.');
+                    for (int z = 0; z < num.Length; z++)
+                    {
+                        if (Object.Equals(num[z], '.')) { pos++; continue; }
+                        outout += expor(inbas.base_value, (z - pos - 1) * inbas.velocity) * Convert.ToDouble(num[z]) * z;
+                    }
+                }
+                else
+                {
+                    for (int z = 0; z < num.Length; z++)
+                    {
+                        outout += expor(inbas.base_value, (z - 1) * inbas.velocity) * Convert.ToDouble(num[z]) * z;
+                    }
+                }
+
+                if (po == 0)
+                    return outout;
+                else
+                    return 0 - outout;
+            }
+        }
+
+        #endregion
+
+        #region EXPANLY
+
+        public double expan(object[] num, Basal asbas, Basal debas)
+        {
+            double outout = 0d;
+            int l = num.Length;
+
+            int[] asarr = new int[l];
+            int[] dearr = new int[l];
+
+            for (int z = 0; z < l; z++)
+            {
+                asarr[z] = z;
+                dearr[z] = z;
+            }
+
+            Console.WriteLine(String.Join(' ', asarr));
+            Console.WriteLine(String.Join(' ', dearr));
+
+            if (asbas.echo != 2) asarr = asbas.echor(asarr, asbas.echo, asbas.ripple, 2);
+            if (debas.echo != 2) dearr = debas.echor(dearr, debas.echo, debas.ripple, 2);
+
+            int q = 0; int pos = Array.IndexOf(num, '.');
+
+            if (asbas.polar == debas.polar)
+            {
+                for (int z = 0; z < l; z++)
+                {
+                    if (pos == z) continue;
+                    outout += Convert.ToDouble(num[z]) * expor(asbas.base_value, asarr[q] * asbas.velocity) * expor(debas.base_value, dearr[l - (q + 1)] * debas.velocity);
+                    q++;
+                }
+            }
+            else if (asbas.polar + debas.polar == 1)
+            {
+                for (int z = 0; z < l; z++)
+                {
+                    if (pos == z) continue;
+                    outout -= Convert.ToDouble(num[z]) * expor(asbas.base_value, asarr[q] * asbas.velocity) * expor(debas.base_value, dearr[l - (q + 1)] * debas.velocity);
+                    q++;
+                }
+            }
+            else
+            {
+                int dpo = 2, apo = 2;
+                if (asbas.polar == 1) apo = 0;
+                else if (asbas.polar == 0) apo = 1;
+                if (debas.polar == 1) dpo = 0;
+                else if (debas.polar == 0) dpo = 1;
+
+
+                for (int z = 0; z < l; z++)
+                {
+                    if (pos == z) continue;
+                    if ((l - q) % 2 == dpo || q % 2 == apo)
+                        outout -= Convert.ToDouble(num[z]) * expor(asbas.base_value, asarr[q] * asbas.velocity) * expor(debas.base_value, dearr[l - (q + 1)] * debas.velocity);
+                    else outout += Convert.ToDouble(num[z]) * expor(asbas.base_value, asarr[q] * asbas.velocity) * expor(debas.base_value, dearr[l - (q + 1)] * debas.velocity);
+                    q++;
+                }
+            }
+
+            return outout;
         }
 
         #endregion
@@ -391,15 +647,17 @@ namespace Calculator
         public double base_value = 10;
 
         public string? display = "<10T";
+        public string? bisplay = "T10>";
 
-        public string? number = "0";
-        public decimal value = 0;
+        public object[] number = { '0' };
+        public double value = 0;
         #endregion
 
+        #region CONSTRUCTORS
         public Basal() { }
 
         public Basal(
-            string num,
+            object[] num,
             double bass,
             int pol,
             int dis,
@@ -416,7 +674,7 @@ namespace Calculator
             ripple = rip;
             velocity = vel;
 
-            if (ripple != 2)
+            if (echo != 2)
             {
                 num = unechor(rip, num, echo);
             }
@@ -448,7 +706,7 @@ namespace Calculator
         }
 
         public Basal(
-            decimal num,
+            double num,
             double bass,
             int pol,
             int dis,
@@ -472,10 +730,11 @@ namespace Calculator
                 number = depolaris(number, bass, vel, pol, 69);
             }
 
-            if (ripple != 2)
+            if (echo != 2)
             {
                 number = echor(number, echo, rip, 0);
             }
         }
+        #endregion
     }
 }

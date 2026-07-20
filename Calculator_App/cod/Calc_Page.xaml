@@ -6,7 +6,7 @@
     <ScrollView>
         <VerticalStackLayout>
             <Label 
-                Text="Basal Calculator v1.0"
+                Text="Basal Calculator v2.7"
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
         
@@ -42,7 +42,7 @@
                 </Grid.RowDefinitions>
                 <Label x:Name="indicat" Text="  Select a Base or Number   " VerticalTextAlignment="Center" HorizontalOptions="Center" Grid.Column="0" />
                 <Entry x:Name="leinput" Placeholder="Select Base or Number" Margin="2" MinimumWidthRequest="100" Grid.Column="1" />
-                <Label x:Name="num_disp" Text="" Margin="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"                       
+                <Label x:Name="num_disp" Text="" Margin="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"
                        HeightRequest="50" Grid.Row="1" Grid.Column="1" />
                 <Button x:Name="setter" Clicked="sette" Text="Set" Margin="2" HorizontalOptions="Center" Grid.Column="2" />
             </Grid>
@@ -56,17 +56,18 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="add" Text="+" Margin="2" Clicked="add_but" Grid.Column="0" />
-                <Button x:Name="sub" Text="-" Margin="2" Clicked="sub_but" Grid.Column="1" />
-                <Button x:Name="mul" Text="×" Margin="2" Clicked="mul_but" Grid.Column="2" />
-                <Button x:Name="div" Text="÷" Margin="2" Clicked="div_but" Grid.Column="3" />
-                <Button x:Name="pow" Text="A ^ B" Margin="2" Clicked="pow_but" Grid.Column="4" />
-                <Button x:Name="mulpowE" Text="A × (e ^ B)" Margin="2" Clicked="mulpow_byE_but" Grid.Column="5" />            
+                <Button x:Name="add" Text="+" Margin="5" Clicked="add_but" Grid.Column="0" />
+                <Button x:Name="sub" Text="-" Margin="5" Clicked="sub_but" Grid.Column="1" />
+                <Button x:Name="mul" Text="×" Margin="5" Clicked="mul_but" Grid.Column="2" />
+                <Button x:Name="div" Text="÷" Margin="5" Clicked="div_but" Grid.Column="3" />
+                <Button x:Name="pow" Text="A ^ B" Margin="5" Clicked="pow_but" Grid.Column="4" />
+                <Button x:Name="mulpowE" Text="A × (e ^ B)" Margin="5" Clicked="mulpow_byE_but" Grid.Column="5" />
             </Grid>
         
 
             <Grid Margin="5">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -84,6 +85,8 @@
 
                 <Button Grid.Column="0" Grid.Row="2" Margin="5" x:Name="discret" Text="গ" FontSize="Medium" Clicked="add_ente_dis"/>
                 <Button Grid.Column="1" Grid.Row="2" Margin="5" x:Name="velocit" Text="স" FontSize="Medium" Clicked="add_ente_vel"/>
+
+                <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="5" x:Name="ripplit" Text="জ" FontSize="Medium" Clicked="add_ente_rip"/>
             </Grid>
         </VerticalStackLayout>
     </ScrollView>

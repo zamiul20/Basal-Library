@@ -2,31 +2,37 @@ namespace Calculator;
 
 public partial class Convert_Page : ContentPage
 {
-	public Convert_Page()
-	{
-		InitializeComponent();
-	}
+    public Convert_Page()
+    {
+        InitializeComponent();
+    }
     string selec = "None";
 
     string inbas = "< 10 T";
     string ansbas = "< 10 T";
-    string innum = "0, 0";
-    string innum_d = "00";
+    string innum = "0 0";
+    string innum_d = "0 0";
 
-    Basal leinbas = new Basal();
-    Basal leoutbas = new Basal();
+    Basal leinbas = new Basal(10, 2, 2, 2, 2, 1);
+    Basal leoutbas = new Basal(10, 2, 2, 2, 2, 1);
 
-    public static char[] ParseNumbers(string input)
+    public static object[] Red__Sea(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
-            return Array.Empty<char>();
+            return Array.Empty<object>();
 
         try
         {
-            return input.Split(',')
-                .SelectMany(s => s.Contains('.')
-                    ? s.Split('.').Select(n => (char)(int.Parse(n.Trim()) + 48)).Concat(new[] { '.' })
-                    : new[] { (char)(int.Parse(s.Trim()) + 48) }).ToArray();
+            return input
+                    .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(token =>
+                    {
+                        if (int.TryParse(token, out int intValue)) return (object)intValue;
+                        if (double.TryParse(token, out double doubleValue)) return (object)doubleValue;
+                        if (token.Length == 1) return (object)token[0];
+                        return (object)token;
+                    })
+                    .ToArray();
         }
         catch
         {
@@ -60,21 +66,28 @@ public partial class Convert_Page : ContentPage
     {
         leinput.Text += 'স';
     }
+    public void add_ente_rip(object? sender, EventArgs e)
+    {
+        leinput.Text += 'জ';
+    }
 
     public void inbas_sel(object? sender, EventArgs e)
     {
+        sette(sender, e);
         indicat_updat("Input Base Selected");
         selec = "inbas";
         leinput.Text = inbas;
     }
     public void innum_sel(object? sender, EventArgs e)
     {
+        sette(sender, e);
         indicat_updat("Input Number Selected");
         selec = "innum";
-        leinput.Text = innum;
+        leinput.Text = innum_d;
     }
     public void ansbas_sel(object? sender, EventArgs e)
     {
+        sette(sender, e);
         indicat_updat("Output Base Selected");
         selec = "outbas";
         leinput.Text = ansbas;
@@ -85,7 +98,7 @@ public partial class Convert_Page : ContentPage
         indicat.Text = s;
     }
 
-    
+
     public void sette(object? sender, EventArgs e)
     {
         switch (selec)
@@ -95,7 +108,7 @@ public partial class Convert_Page : ContentPage
                 break;
             case "innum":
                 innum_d = leinput.Text;
-                innum = String.Join("", ParseNumbers(leinput.Text));
+                innum = String.Join("", Red__Sea(leinput.Text));
                 break;
             case "outbas":
                 ansbas = leinput.Text;
@@ -106,95 +119,96 @@ public partial class Convert_Page : ContentPage
 
     public void conver(object? sender, EventArgs e)
     {
-        leinbas = new Basal();
-        leoutbas = new Basal();
-
-        if (ansbas.Length > 2)
+        sette(sender, e);
+        try
         {
-            string[] x = ansbas.Split(' ').Where(s => !string.IsNullOrEmpty(s)).ToArray();
+            leinbas = new Basal();
+            leoutbas = new Basal();
 
-            leoutbas.base_value = double.Parse(x[1]);
-
-            if (x.Contains("ঋ"))
-                leoutbas.polar = 0;
-            else if (x.Contains("দ"))
-                leoutbas.polar = 1;
-            else leoutbas.polar = 2;
-
-            if (x.Contains("+ল"))
+            if (ansbas.Length > 2)
             {
-                leoutbas.echo = 0;
-                leoutbas.ripple = int.Parse(x[x.IndexOf("+ল") + 1]);
-            }
-            else if (x.Contains("-ল"))
-            {
-                leoutbas.echo = 1;
-                leoutbas.ripple = int.Parse(x[x.IndexOf("-ল") + 1]);
-            }
-            else leoutbas.echo = 2;
+                string[] x = ansbas.Split(' ').Where(s => !string.IsNullOrEmpty(s)).ToArray();
 
-            if (x.Contains("স"))
-            {
-                leoutbas.velocity = double.Parse(x[x.IndexOf("স") + 1]);
+                leoutbas.base_value = double.Parse(x[1]);
+
+                if (x.Contains("ঋ"))
+                    leoutbas.polar = 0;
+                else if (x.Contains("দ"))
+                    leoutbas.polar = 1;
+                else leoutbas.polar = 2;
+
+                if (x.Contains("+ল"))
+                {
+                    leoutbas.echo = 0;
+                    leoutbas.ripple = int.Parse(x[x.IndexOf("+ল") + 1]);
+                }
+                else if (x.Contains("-ল"))
+                {
+                    leoutbas.echo = 1;
+                    leoutbas.ripple = int.Parse(x[x.IndexOf("-ল") + 1]);
+                }
+                else leoutbas.echo = 2;
+
+                if (x.Contains("স"))
+                {
+                    leoutbas.velocity = double.Parse(x[x.IndexOf("স") + 1]);
+                }
+                leoutbas.disp();
+                ansbas_but.Text = $"Output Base - {leoutbas.display}";
             }
-            leoutbas.disp();
-            ansbas_but.Text = $"Output Base - {leoutbas.display}";
+            else { indicat.Text = "Output Base not defined"; }
+
+            if (inbas.Length > 2)
+            {
+                string[] x = inbas.Split(' ').Where(s => !string.IsNullOrEmpty(s)).ToArray();
+
+                leinbas.base_value = double.Parse(x[1]);
+
+                if (x.Contains("ঋ"))
+                    leinbas.polar = 0;
+                else if (x.Contains("দ"))
+                    leinbas.polar = 1;
+                else leinbas.polar = 2;
+
+                if (x.Contains("+ল"))
+                {
+                    leinbas.echo = 0;
+                    leinbas.ripple = int.Parse(x[x.IndexOf("+ল") + 1]);
+                }
+                else if (x.Contains("-ল"))
+                {
+                    leinbas.echo = 1;
+                    leinbas.ripple = int.Parse(x[x.IndexOf("-ল") + 1]);
+                }
+                else leinbas.echo = 2;
+
+                if (x.Contains("স"))
+                {
+                    leinbas.velocity = double.Parse(x[x.IndexOf("স") + 1]);
+                }
+                leinbas.disp();
+                inbas_but.Text = $"Input Base - {leinbas.display}";
+            }
+            else { indicat.Text = "Input Base not defined"; }
+
+            leinbas = new Basal(Red__Sea(innum), leinbas.base_value, leinbas.polar, -8, leinbas.echo, leinbas.ripple, leinbas.velocity);
+
+            innum_but.Text = "Input Number - <10T " + leinbas.value.ToString();
+
+            Basal tmp = new Basal();
+            leoutbas.number = tmp.notobasten(leinbas.value, leoutbas.base_value, leoutbas.velocity, 69);
+
+            if (leoutbas.polar != 2)
+                leoutbas.number = tmp.depolaris(leoutbas.number, leoutbas.base_value, leoutbas.velocity, leoutbas.polar, 69);
+            if (leoutbas.echo != 2)
+                leoutbas.number = tmp.echor(leoutbas.number, leoutbas.echo, leoutbas.ripple, 0);
+
+            num_disp.Text = $"Output Number in {leoutbas.display} ⟶" + String.Join(' ', leoutbas.number);
         }
-        else { indicat.Text = "Output Base not defined"; }
-
-        if (inbas.Length > 2)
+        catch
         {
-            string[] x = inbas.Split(' ').Where(s => !string.IsNullOrEmpty(s)).ToArray();
-
-            leinbas.base_value = double.Parse(x[1]);
-
-            if (x.Contains("ঋ"))
-                leinbas.polar = 0;
-            else if (x.Contains("দ"))
-                leinbas.polar = 1;
-            else leinbas.polar = 2;
-
-            if (x.Contains("+ল"))
-            {
-                leinbas.echo = 0;
-                leinbas.ripple = int.Parse(x[x.IndexOf("+ল") + 1]);
-            }
-            else if (x.Contains("-ল"))
-            {
-                leinbas.echo = 1;
-                leinbas.ripple = int.Parse(x[x.IndexOf("-ল") + 1]);
-            }
-            else leinbas.echo = 2;
-
-            if (x.Contains("স"))
-            {
-                leinbas.velocity = double.Parse(x[x.IndexOf("স") + 1]);
-            }
-            leinbas.disp();
-            inbas_but.Text = $"Input Base - {leinbas.display}";
+            num_disp.Text = "The inputs did not work as intended, and error formed";
         }
-        else { indicat.Text = "Input Base not defined"; }
-
-        leinbas = new Basal(innum, leinbas.base_value, leinbas.polar, -8, leinbas.echo, leinbas.ripple, leinbas.velocity);
-
-        innum_but.Text = "Input Number - <10T " + leinbas.value.ToString();
-
-        Basal tmp = new Basal();
-        leoutbas.number = tmp.notobasten(leinbas.value, leoutbas.base_value, leoutbas.velocity, 69);
-
-        if (leoutbas.polar != 2)
-            leoutbas.number = tmp.depolaris(leoutbas.number, leoutbas.base_value, leoutbas.velocity, leoutbas.polar, 69);
-        if (leoutbas.ripple != 2)
-            leoutbas.number = tmp.echor(leoutbas.number, leoutbas.ripple, leoutbas.echo, 0);
-
-        string outout = " = ";
-
-        for (int z = 0; z < leoutbas.number.Length; z++)
-        {
-            outout += ((int)leoutbas.number[z] - 48).ToString() + " ";
-        }
-
-        num_disp.Text = $"Output Number in {leoutbas.display} ⟶" + leoutbas.number + outout;
     }
 
 }

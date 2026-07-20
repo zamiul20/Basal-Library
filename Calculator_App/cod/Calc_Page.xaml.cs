@@ -5,82 +5,98 @@ public partial class Calc_Page : ContentPage
     #region VARIABLES
     string selec = "780";
 
-    string firbas = "< 10 T"; string firnum = "0,0"; string firnum_disp = "";
-    string secbas = "< 10 T"; string secnum = "0,0"; string secnum_disp = "";
+    string firbas = "< 10 T"; object[] firnum = { "0" }; string firnum_disp = "";
+    string secbas = "< 10 T"; object[] secnum = { "0" }; string secnum_disp = "";
 
-    string ansbas = "< 10 T"; string? ansnum = "No Calculation Yet"; string ansnum_disp = "";
+    string ansbas = "< 10 T"; object[] ansnum = { "No Calculation Yet" }; string ansnum_disp = "";
 
-    Basal[] basar = [new Basal(), new Basal(), new Basal()];
+    Basal[] basar = [new Basal(10, 2, 2, 2, 2, 1), new Basal(10, 2, 2, 2, 2, 1), new Basal(10, 2, 2, 2, 2, 1)];
 
     #endregion
 
     public Calc_Page()
-	{
-		InitializeComponent();
-	}
-    public static char[] ParseNumbers(string input)
+    {
+        InitializeComponent();
+    }
+    public static object[] Red__Sea(string input)
     {
         if (string.IsNullOrWhiteSpace(input))
-            return Array.Empty<char>();
+            return Array.Empty<object>();
 
         try
-        { 
-        return input.Split(',')
-            .SelectMany(s => s.Contains('.')
-                ? s.Split('.').Select(n => (char)(int.Parse(n.Trim()) + 48)).Concat(new[] { '.' })
-                : new[] { (char)(int.Parse(s.Trim()) + 48) }).ToArray(); 
+        {
+            return input
+                    .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(token =>
+                    {
+                        if (int.TryParse(token, out int intValue)) return (object)intValue;
+                        if (double.TryParse(token, out double doubleValue)) return (object)doubleValue;
+                        if (token.Length == 1) return (object)token[0];
+                        return (object)token;
+                    })
+                    .ToArray();
         }
         catch
         {
             return ['w', 'h', 'y'];
         }
-        
+
     }
 
     public void indicator(string indicati)
     {
         indicat.Text = indicati;
     }
+    public void indicator(object[] indicati)
+    {
+        indicat.Text = String.Join(' ', indicati);
+    }
 
     #region SELECT_SET
     public void firbas_selec(object? sender, EventArgs e)
-	{
+    {
+        sette(sender, e);
         selec = "firbas";
         indicator("First Base Selected");
         leinput.Text = firbas;
-	}
+    }
     public void secbas_selec(object? sender, EventArgs e)
     {
+        sette(sender, e);
         selec = "secbas";
         indicator("Second Base Selected");
         leinput.Text = secbas;
     }
     public void ansbas_selec(object? sender, EventArgs e)
     {
+        sette(sender, e);
         selec = "ansbas";
         indicator("Answer Base Selected");
         leinput.Text = ansbas;
     }
     public void firnum_selec(object? sender, EventArgs e)
     {
+        sette(sender, e);
         selec = "firnum";
         indicator("First Number Selected");
         num_disp.Text = firnum_disp;
-        leinput.Text = firnum;
+        leinput.Text = firnum_disp;
     }
     public void secnum_selec(object? sender, EventArgs e)
     {
+        sette(sender, e);
         selec = "secnum";
         indicator("Second number Selected");
         num_disp.Text = secnum_disp;
-        leinput.Text = secnum;
+        leinput.Text = secnum_disp;
     }
     public void ansnum_selec(object? sender, EventArgs e)
     {
+        sette(sender, e);
         selec = "ansnum";
         indicator("Answer number Selected");
         num_disp.Text = ansnum_disp;
-        leinput.Text = ansnum;
+        leinput.Text = ansnum_disp;
     }
 
     public void sette(object? sender, EventArgs e)
@@ -97,12 +113,12 @@ public partial class Calc_Page : ContentPage
 
             case "firnum":
                 firnum_disp = leinput.Text;
-                firnum = String.Join("", ParseNumbers(leinput.Text));
+                firnum = Red__Sea(' ' + firnum_disp + ' ');
                 break;
 
             case "secnum":
                 secnum_disp = leinput.Text;
-                secnum = String.Join("", ParseNumbers(leinput.Text));
+                secnum = Red__Sea(' ' + secnum_disp + ' ');
                 break;
 
             case "ansbas":
@@ -134,6 +150,10 @@ public partial class Calc_Page : ContentPage
     public void add_ente_vel(object? sender, EventArgs e)
     {
         leinput.Text += 'স';
+    }
+    public void add_ente_rip(object? sender, EventArgs e)
+    {
+        leinput.Text += 'জ';
     }
     #endregion
 
@@ -247,10 +267,16 @@ public partial class Calc_Page : ContentPage
 
     public void setbas()
     {
+
         makbas();
 
-        basar[0] = new Basal(firnum, basar[0].base_value, basar[0].polar, 0, basar[0].echo, basar[0].ripple, basar[0].velocity);
-        basar[1] = new Basal(secnum, basar[1].base_value, basar[1].polar, 1, basar[1].echo, basar[1].ripple, basar[1].velocity);
+        var x = firnum;
+        var y = secnum;
+
+        Array.Reverse(x); Array.Reverse(y);
+
+        basar[0] = new Basal(x, basar[0].base_value, basar[0].polar, 0, basar[0].echo, basar[0].ripple, basar[0].velocity);
+        basar[1] = new Basal(y, basar[1].base_value, basar[1].polar, 1, basar[1].echo, basar[1].ripple, basar[1].velocity);
 
         firnum_but.Text = "First Number - <10T " + basar[0].value.ToString();
         secnum_but.Text = "Second Number - <10T " + basar[1].value.ToString();
@@ -260,69 +286,78 @@ public partial class Calc_Page : ContentPage
 
     public void giv_ans()
     {
-        ansnum_but.Text = "Answer Number - <10T " + basar[2].value.ToString();
-
-        Basal tmp = new Basal();
-
-        var po = 0;
-        if (basar[2].value > 0)
+        try
         {
-            basar[2].value = Math.Abs(basar[2].value);
-            po = 1;
+            ansnum_but.Text = "Answer Number - <10T " + basar[2].value.ToString();
+
+            Basal tmp = new Basal();
+
+            var po = 0;
+            if (basar[2].value < 0)
+            {
+                basar[2].value = Math.Abs(basar[2].value);
+                po = 1;
+            }
+
+            basar[2].number = tmp.notobasten(basar[2].value, basar[2].base_value, basar[2].velocity, 69);
+
+            if (basar[2].polar != 2) basar[2].number = tmp.depolaris(basar[2].number, basar[2].base_value, basar[2].velocity, basar[2].polar, 69);
+            if (basar[2].echo != 2) basar[2].number = tmp.echor(basar[2].number, basar[2].echo, basar[2].ripple, 0);
+
+            if (po == 0)
+                ansnum_disp = String.Join(' ', basar[2].number) + ' ';
+            else
+                ansnum_disp = "- " + String.Join(' ', basar[2].number) + ' ';
+
+            ansnum = basar[2].number;
+            num_disp.Text = String.Join(' ', basar[2].number);
         }
-
-        basar[2].number = tmp.notobasten(basar[2].value, basar[2].base_value, basar[2].velocity, 69);
-        
-        if (basar[2].polar != 2) 
-            basar[2].number = tmp.depolaris(basar[2].number, basar[2].base_value, basar[2].velocity, basar[2].polar, 69);
-        if (basar[2].echo != 2) 
-            basar[2].number = tmp.echor(basar[2].number, basar[2].ripple, basar[2].echo, 0);        
-
-        if (po == 0)
-            ansnum_disp = basar[2].number + " ";
-        else
-            ansnum_disp = "- " + basar[2].number + " ";
-
-        ansnum = ansnum_disp;
+        catch { }
     }
 
     public void add_but(object? sender, EventArgs e)
     {
+        sette(sender, e);
         setbas();
         basar[2].value = basar[0].value + basar[1].value;
         giv_ans();
     }
     public void sub_but(object? sender, EventArgs e)
     {
+        sette(sender, e);
         setbas();
         basar[2].value = basar[0].value - basar[1].value;
         giv_ans();
     }
     public void mul_but(object? sender, EventArgs e)
     {
+        sette(sender, e);
         setbas();
         basar[2].value = basar[0].value * basar[1].value;
         giv_ans();
     }
     public void div_but(object? sender, EventArgs e)
     {
+        sette(sender, e);
         setbas();
         basar[2].value = basar[0].value / basar[1].value;
         giv_ans();
     }
     public void pow_but(object? sender, EventArgs e)
     {
+        sette(sender, e);
         setbas();
-        basar[2].value = Convert.ToDecimal(Basal.expor(decimal.ToDouble(basar[0].value), decimal.ToDouble(basar[1].value)));
+        basar[2].value = Basal.expor(basar[0].value, basar[1].value);
         giv_ans();
     }
     public void mulpow_byE_but(object? sender, EventArgs e)
     {
+        sette(sender, e);
         setbas();
-        basar[2].value = basar[0].value * Convert.ToDecimal(Basal.expor(Math.E, decimal.ToDouble(basar[1].value)));
+        basar[2].value = basar[0].value * Basal.expor(Math.E, basar[1].value);
         giv_ans();
     }
-    
+
     #endregion
 
 }
