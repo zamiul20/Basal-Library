@@ -17,3 +17,4 @@ Functions (using ebass as the object of class Basal), not all functions are in b
 12. Basal.expor : Returns the value of exponentiation (kinda)
 13. Basal.Cn : Returns the unicode position of a character relative to '0'
 14. Basal.Vn : Returns the character of a value (48 is added)
+15. Basal.shift : Returns a list shifted be a given value of positions (int)
