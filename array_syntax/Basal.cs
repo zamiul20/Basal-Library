@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.Swift;
-using System.Text;
-
 namespace Calculator
 {
     internal class Basal
@@ -31,40 +26,41 @@ namespace Calculator
 
         #region CONVERT TO AND FROM DENARY
 
-        public decimal tobasten(object[] num, double bass, double velocity)
+        public double tobasten(object[] num, double bass, double velocity)
         {
-            int po = 0;
-            if ((char)num[0] == '-')
+            int po = 0; char res = 'I';
+            Char.TryParse(num[0].ToString(), out res);
+
+            if (res == '-')
             {
                 po = 1;
                 object[] temp = new object[] { };
-                Array.Copy(num, 1, temp, 0, num.Length-1);
+                Array.Copy(num, 1, temp, 0, num.Length - 1);
                 num = temp;
             }
-            decimal outout = 0;
-            Array.Reverse(num);
+            double outout = 0d;
 
             if (num.Contains('.'))
             {
                 int pos = Array.IndexOf(num, '.');
                 for (int z = 0; z < num.Length; z++)
                 {
-                    if ((char)num[z] == '.') { pos++; continue; }
-                    outout += (decimal)expor(bass, (z - pos) * velocity) * (decimal)num[z];
+                    if (Object.Equals(num[z], '.')) { pos++; continue; }
+                    outout += expor(bass, (z - pos) * velocity) * Convert.ToDouble(num[z]);
                 }
             }
             else
             {
                 for (int z = 0; z < num.Length; z++)
                 {
-                    outout += (decimal)expor(bass, z * velocity) * (decimal)num[z];
+                    outout += expor(bass, z * velocity) * Convert.ToDouble(num[z]);
                 }
             }
 
             if (po == 0) return outout;
             else return 0 - outout;
         }
-        public object[] notobasten(decimal num, double bass, double velocity, int accuracy)
+        public object[] notobasten(double num, double bass, double velocity, int accuracy)
         {
             int statis = 0;
             if (bass < 1)
@@ -73,13 +69,13 @@ namespace Calculator
                 bass = 1 / bass;
             }
 
-            int ceil = (int)(1 + Math.Floor(Math.Log(Math.Abs((double)num), expor(bass, velocity))));
-            object[] outout = { };
+            int ceil = (int)(1 + Math.Floor(Math.Log(Math.Abs(Convert.ToDouble(num)), expor(bass, velocity))));
+            List<object> outout = new List<object> { };
 
             for (int z = 0; z < ceil; z++)
             {
                 int q = ceil - (z + 1);
-                decimal index = (decimal)expor(bass, (q * velocity));
+                double index = expor(bass, (q * velocity));
 
                 int t = (int)(Math.Floor(num / index));
 
@@ -87,32 +83,33 @@ namespace Calculator
                 {
                     num -= t * index;
                 }
-                outout.Append(t);
+                outout.Add(t);
             }
 
             if (num == 0)
             {
-                if (statis == 0) return outout;
+                if (statis == 0) return outout.ToArray<object>();
                 else
                 {
-                    Array.Reverse(outout);
-                    return outout;
+                    object[] x = outout.ToArray<object>();
+                    Array.Reverse(x);
+                    return x;
                 }
             }
             else
             {
-                outout.Append('.');
+                outout.Add('.');
 
                 for (int z = 0; z < (accuracy - ceil); z++)
                 {
                     if (num == 0)
                     {
-                        return outout;
+                        return outout.ToArray<object>();
                     }
-                    decimal index = 1M;
+                    double index = 1d;
                     try
                     {
-                        index = (decimal)expor(bass, (0 - (z + 1)) * velocity);
+                        index = expor(bass, (0 - (z + 1)) * velocity);
                     }
                     catch
                     {
@@ -125,10 +122,10 @@ namespace Calculator
                     {
                         num -= t * index;
                     }
-                    outout.Append(t);
+                    outout.Add(t);
                 }
-                if (statis == 0) return outout;
-                else { Array.Reverse(outout); return outout; }
+                if (statis == 0) return outout.ToArray<object>();
+                else { object[] x = outout.ToArray<object>(); Array.Reverse(x); return x; }
             }
         }
 
@@ -136,24 +133,23 @@ namespace Calculator
 
         #region POLARITY
 
-        public decimal polaris(object[] num, double bass, double velocity, int mod)
+        public double polaris(object[] num, double bass, double velocity, int mod)
         {
-            decimal outout = 0M;
+            double outout = 0d;
             int l = num.Length;
             int q = l;
 
             for (int z = 0; z < l; z++)
             {
-                if ((char)num[z] == '.') continue;
-
+                if (Object.Equals('.', num[z])) continue;
                 q--;
                 if (z % 2 == mod)
                 {
-                    outout += (decimal)((double)num[z] * expor(bass, (q * velocity)));
+                    outout += Convert.ToDouble(num[z]) * expor(bass, (q * velocity));
                 }
                 else
                 {
-                    outout -= (decimal)((double)num[z] * expor(bass, (q * velocity)));
+                    outout -= Convert.ToDouble(num[z]) * expor(bass, (q * velocity));
                 }
             }
 
@@ -161,13 +157,12 @@ namespace Calculator
         }
         public object[] depolaris(object[] num, double bass, double velocity, int mod, int accuracy)
         {
-            decimal abls = 0;
+            double abls = 0;
 
             Array.Reverse(num);
 
             int z = 0;
-            if (-1 != Array.IndexOf(num, '.'))
-                z = Array.IndexOf(num, '.') - num.Length;
+            if (-1 != Array.IndexOf(num, '.')) z = Array.IndexOf(num, '.') - num.Length;
 
             for (int z_2 = 0; z_2 < num.Length; z_2++)
             {
@@ -178,8 +173,8 @@ namespace Calculator
                 {
                     if ((char)num[z_2] != '0')
                     {
-                        abls += (decimal)expor(bass, (z + 1) * velocity);
-                        abls += (decimal)(bass - (2 * (double)num[z_2]) * expor(bass, z * velocity));
+                        abls += expor(bass, (z + 1) * velocity);
+                        abls += bass - (2 * Convert.ToDouble(num[z_2]) * expor(bass, z * velocity));
                     }
                 }
             }
@@ -299,10 +294,6 @@ namespace Calculator
             int x = num.Length;
             int count = x;
             string fire = "I";
-            char[]? placehold = ['জ'];
-
-            if (uni == 1)
-                placehold[0] = '&';
 
             while (x >= 0)
             {
@@ -330,6 +321,71 @@ namespace Calculator
 
             left_arr.Reverse();
             object[] outout = new object[] { };
+
+            if (mode == 0)
+            {
+                if (rip < 0)
+                {
+                    left_arr.Reverse();
+                    right_arr.Reverse();
+                }
+                if (uni == 0) left_arr.Add('জ');
+                else if (uni == 1) left_arr.Add('&');
+
+                left_arr.AddRange(right_arr);
+                outout = left_arr.ToArray();
+            }
+            else
+            {
+                if (rip < 0)
+                {
+                    left_arr.Reverse();
+                    right_arr.Reverse();
+                }
+                if (uni == 0) right_arr.Add('জ');
+                else if (uni == 1) right_arr.Add('&');
+
+                right_arr.AddRange(left_arr);
+                outout = right_arr.ToArray();
+            }
+
+            return outout;
+        }
+        public int[] echor(int[] num, int mode, int rip, int uni)
+        {
+            int ripl = Math.Abs(rip);
+            List<int> left_arr = new List<int> { };
+            List<int> right_arr = new List<int> { };
+            int x = num.Length;
+            int count = x;
+            string fire = "I";
+
+            while (x >= 0)
+            {
+                if (fire == "780") { fire = "I"; }
+                else if (fire == "I") { fire = "780"; }
+                else { return [0]; }
+
+                for (int z = 0; z < ripl; z++)
+                {
+                    if (fire == "I")
+                    {
+                        if (x == 0) break;
+                        else left_arr.Add(num[count - x]);
+                    }
+
+                    else if (fire == "780")
+                    {
+                        if (x == 0) break;
+                        else right_arr.Add(num[count - x]);
+                    }
+                    x--;
+                }
+                if (x == 0) { break; }
+            }
+
+            left_arr.Reverse();
+            int[] outout = new int[] { };
 
             if (mode == 0)
             {
@@ -404,56 +460,103 @@ namespace Calculator
 
             return display;
         }
+        public string? bisp()
+        {
+            string outout = "T";
+
+            if (velocity != 1)
+            {
+                outout += $"স{velocity}";
+            }
+
+            if (echo != 2)
+            {
+                if (echo == 0)
+                {
+                    outout += $"+ল{ripple}";
+                }
+                else if (echo == 1)
+                {
+                    outout += $"-ল{ripple}";
+                }
+            }
+
+            if (discretion != 0)
+            {
+                outout += "গ";
+            }
+
+            if (polar != 2)
+            {
+                if (polar == 0)
+                {
+                    outout += "ঋ";
+                }
+                else if (polar == 1)
+                {
+                    outout += "দ";
+                }
+            }
+
+            bisplay = outout + $"{base_value}>";
+
+            return bisplay;
+        }
 
         #endregion
 
         #region CALCULUS
 
-        public decimal disintegrate(object[] num, Basal inbas)
+        public double disintegrate(object[] num, Basal inbas)
         {
             if (inbas.echo != 2) { num = inbas.unechor(inbas.ripple, num, inbas.echo); }
 
             if (inbas.polar != 2)
             {
-                decimal outout = 0M; int l = num.Length; int q = l - 2;
+                double outout = 0d; int l = num.Length; int q = l - 2;
 
                 for (int z = 0; z < l; z++)
                 {
-                    if ((char)num[z] == '.') { continue; }
-                    q--;
-                    if (z % 2 == inbas.polar)
-                        outout += (decimal)((double)num[z] * expor(inbas.base_value, (q - 1) * inbas.velocity) * q);
-                    else
-                        outout += (decimal)((double)num[z] * expor(inbas.base_value, (q - 1) * inbas.velocity) * q);
+                    try { if ((char)num[z] == '.') { continue; } }
+                    catch
+                    {
+                        q--;
+                        if (z % 2 == inbas.polar)
+                            outout += (Convert.ToDouble(num[z]) * expor(inbas.base_value, (q - 1) * inbas.velocity) * q);
+                        else
+                            outout += (Convert.ToDouble(num[z]) * expor(inbas.base_value, (q - 1) * inbas.velocity) * q);
+                    }
                 }
                 return outout;
             }
             else
             {
-                int po = 0;
-                if ((char)num[0] == '-')
+                int po = 0; char res = 'I';
+                Char.TryParse(num[0].ToString(), out res);
+
+                if (res == '-')
                 {
                     po = 1;
                     object[] temp = new object[] { };
                     Array.Copy(num, 1, temp, 0, num.Length - 1);
                     num = temp;
                 }
-                decimal outout = 0M; Array.Reverse(num);
+                double outout = 0d; Array.Reverse(num);
 
                 if (num.Contains('.'))
                 {
                     int pos = Array.IndexOf(num, '.');
                     for (int z = 0; z < num.Length; z++)
                     {
-                        if ((char)num[z] == '.') { pos++; continue; }
-                        outout += (decimal)expor(inbas.base_value, (z - pos - 1) * inbas.velocity) * (decimal)num[z] * z;
+                        if (Object.Equals(num[z], '.')) { pos++; continue; }
+                        outout += expor(inbas.base_value, (z - pos - 1) * inbas.velocity) * Convert.ToDouble(num[z]) * z;
                     }
                 }
                 else
                 {
                     for (int z = 0; z < num.Length; z++)
                     {
-                        outout += (decimal)expor(inbas.base_value, (z - 1) * inbas.velocity) * (decimal)num[z] * z;
+                        outout += expor(inbas.base_value, (z - 1) * inbas.velocity) * Convert.ToDouble(num[z]) * z;
                     }
                 }
 
@@ -462,6 +565,72 @@ namespace Calculator
                 else
                     return 0 - outout;
             }
+        }
+
+        #endregion
+
+        #region EXPANLY
+
+        public double expan(object[] num, Basal asbas, Basal debas)
+        {
+            double outout = 0d;
+            int l = num.Length;
+
+            int[] asarr = new int[l];
+            int[] dearr = new int[l];
+
+            for (int z = 0; z < l; z++)
+            {
+                asarr[z] = z;
+                dearr[z] = z;
+            }
+
+            Console.WriteLine(String.Join(' ', asarr));
+            Console.WriteLine(String.Join(' ', dearr));
+
+            if (asbas.echo != 2) asarr = asbas.echor(asarr, asbas.echo, asbas.ripple, 2);
+            if (debas.echo != 2) dearr = debas.echor(dearr, debas.echo, debas.ripple, 2);
+
+            int q = 0; int pos = Array.IndexOf(num, '.');
+
+            if (asbas.polar == debas.polar)
+            {
+                for (int z = 0; z < l; z++)
+                {
+                    if (pos == z) continue;
+                    outout += Convert.ToDouble(num[z]) * expor(asbas.base_value, asarr[q] * asbas.velocity) * expor(debas.base_value, dearr[l - (q + 1)] * debas.velocity);
+                    q++;
+                }
+            }
+            else if (asbas.polar + debas.polar == 1)
+            {
+                for (int z = 0; z < l; z++)
+                {
+                    if (pos == z) continue;
+                    outout -= Convert.ToDouble(num[z]) * expor(asbas.base_value, asarr[q] * asbas.velocity) * expor(debas.base_value, dearr[l - (q + 1)] * debas.velocity);
+                    q++;
+                }
+            }
+            else
+            {
+                int dpo = 2, apo = 2;
+                if (asbas.polar == 1) apo = 0;
+                else if (asbas.polar == 0) apo = 1;
+                if (debas.polar == 1) dpo = 0;
+                else if (debas.polar == 0) dpo = 1;
+
+
+                for (int z = 0; z < l; z++)
+                {
+                    if (pos == z) continue;
+                    if ((l - q) % 2 == dpo || q % 2 == apo)
+                        outout -= Convert.ToDouble(num[z]) * expor(asbas.base_value, asarr[q] * asbas.velocity) * expor(debas.base_value, dearr[l - (q + 1)] * debas.velocity);
+                    else outout += Convert.ToDouble(num[z]) * expor(asbas.base_value, asarr[q] * asbas.velocity) * expor(debas.base_value, dearr[l - (q + 1)] * debas.velocity);
+                    q++;
+                }
+            }
+
+            return outout;
         }
 
         #endregion
@@ -478,9 +647,10 @@ namespace Calculator
         public double base_value = 10;
 
         public string? display = "<10T";
+        public string? bisplay = "T10>";
 
         public object[] number = { '0' };
-        public decimal value = 0;
+        public double value = 0;
         #endregion
 
         #region CONSTRUCTORS
@@ -536,7 +706,7 @@ namespace Calculator
         }
 
         public Basal(
-            decimal num,
+            double num,
             double bass,
             int pol,
             int dis,
@@ -567,5 +737,4 @@ namespace Calculator
         }
         #endregion
     }
-
 }
