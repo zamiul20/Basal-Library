@@ -17,7 +17,7 @@ The buttons at the bottom of the menu are the symbols to add the attributes or t
 
 The button that reads 'set' sets the value of what is in the textbox, which will need to be done before selecting another parameter or sending the numbers to be calculated
 
-The operations clicked are what you perform on the 2 numbers (have to be set beforehand).
+The operations clicked are what you perform on the numbers and their bases (have to be set beforehand).
 
 All available operations:
 1. Addition
