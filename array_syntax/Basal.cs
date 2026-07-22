@@ -34,7 +34,7 @@ namespace Calculator
             if (res == '-')
             {
                 po = 1;
-                object[] temp = new object[] { };
+                object[] temp = new object[num.Length - 1] { };
                 Array.Copy(num, 1, temp, 0, num.Length - 1);
                 num = temp;
             }
@@ -166,12 +166,12 @@ namespace Calculator
 
             for (int z_2 = 0; z_2 < num.Length; z_2++)
             {
-                if ((char)num[z_2] == '.') continue;
+                if (num[z_2]?.ToString() == ".") continue;
 
                 z += 1;
-                if (z % 2 == mod)
+                if (Math.Abs(z) % 2 == mod)
                 {
-                    if ((char)num[z_2] != '0')
+                    if ((char)num[z_2] != "0")
                     {
                         abls += expor(bass, (z + 1) * velocity);
                         abls += bass - (2 * Convert.ToDouble(num[z_2]) * expor(bass, z * velocity));
@@ -537,7 +537,7 @@ namespace Calculator
                 if (res == '-')
                 {
                     po = 1;
-                    object[] temp = new object[] { };
+                    object[] temp = new object[num.Length - 1] { };
                     Array.Copy(num, 1, temp, 0, num.Length - 1);
                     num = temp;
                 }
