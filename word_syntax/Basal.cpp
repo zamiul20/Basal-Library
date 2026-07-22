@@ -40,7 +40,7 @@ public:
         Deconvert(num);
     }
 
-    void Convert(int noom)
+    void Convert(double noom)
     {
         number = notobasten(noom, base_value, velocity, accuracy);
 
