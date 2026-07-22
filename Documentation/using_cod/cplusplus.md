@@ -1,6 +1,6 @@
 # Using the C++ files
 
-The Basal.cpp file in \array_syntax\ is under development, and may not work as intended
+The Basal.cpp file in /array_syntax/ is under development, and may not work as intended
 
 Constructor - `Basal()` - makes an object with default parameters, entered parameters from number to value or value to number
 
