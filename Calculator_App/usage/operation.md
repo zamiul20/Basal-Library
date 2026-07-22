@@ -29,4 +29,4 @@ All available operations:
 7. Conversion
 8. Differentiation
 9. Fabrication by basal polynomial
-10. Expansion
+10. Polynomial expansion
