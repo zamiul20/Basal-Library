@@ -212,13 +212,14 @@ class Basal:
                 fire = 'I'
         
         return out
-    def echor(ripple : int, mode : int, num : list) -> list:
+    def echor(ripple : int, mode : int, num : str) -> str:
         r = ripple
         ripple = abs(ripple)
         left_arr =  []
         right_arr = []
         x = count = len(num)
         fire = 'I'
+        num = ''.join(reversed(num))
 
         if bool(mode == 1):
             fire = '780'
@@ -228,27 +229,26 @@ class Basal:
             elif bool(fire == 'I'):fire = '780'
             else:print('Fatal Error Found, Exiting');exit()
 
-            for z in range(ripple):
-                
-                if bool(fire == 'I'):
-                    pos = count - x
-                    if bool(x == 0):break
-                    else:
-                        left_arr.append(num[pos])
 
-                elif bool(fire == '780'):
-                    pos = count - x
+            if bool(fire == 'I'):
+                for z in range(ripple):
                     if bool(x == 0):break
-                    else:
-                        right_arr.append(num[pos])
-                x -= 1            
+                    else : left_arr.append(num[count - x])
+                    x -= 1
+
+            elif bool(fire == '780'):
+                for z in range(ripple):
+                    if bool(x == 0):break
+                    else : right_arr.append(num[count - x])
+                    x -= 1
 
                 if bool(x == 0):break
 
+            if bool(x == 0):break
         if bool(r < 0) : right_arr.reverse()
         else : left_arr.reverse()
             
-        return left_arr + ["জ"] + right_arr
+        return ''.join(left_arr) + "জ" + ''.join(right_arr)
 
     def ct_disp(self) -> str:
         outout = f"<{self.base_value}"
