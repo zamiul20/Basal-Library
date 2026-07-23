@@ -50,7 +50,7 @@ Or: (Works for any velocity, also the method of the code files) for every digit 
 
 1     5     -->  1   3   5   7
    3     7  --> +1   4   0   6  - Column addition
-                 2   7   6   3  -> <10ঋT 2763 = <10T 1357
+                 2   7   6   3  -> <10দT 2763 = <10T 1357
 ```
 
 NOTE: for Fractal bases (of both types), use array syntax
