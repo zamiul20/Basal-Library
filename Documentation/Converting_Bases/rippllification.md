@@ -46,7 +46,6 @@ Attach / concatenate the top row to the bottom with `জ` in the middle, to sign
 
 <R+ল+3T 95.3জ012678 = <R+ল+3T 9, 5, ., 3, জ, 0, 1, 2, 6, 7, 8 = 98765.3210
 
-
 ```
 
 
