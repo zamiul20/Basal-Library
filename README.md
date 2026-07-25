@@ -1,5 +1,5 @@
 # Basal Library
-The library of files for my concept of a branch of mathematics (basal).
+The library of files for my experiment of a branch of mathematics (basal).
 
 The code files are for proving (computationally) that the system is correct.
 
