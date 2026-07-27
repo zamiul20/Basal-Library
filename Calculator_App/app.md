@@ -8,3 +8,5 @@ Directories:
 The software is to be used at your own risk, use numbers that can fit in a `double` datatype (C#), and numbers that your machine can handle although it has worked well on a potato - a school PC shaped potato.
 
 The app may not look good, but it is supposed to be functional, but looks better than previous basal calculators, and is much easier to use.
+
+Some functions are still in development, and may not work as intended
