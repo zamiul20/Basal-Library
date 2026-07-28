@@ -18,17 +18,40 @@ All inputs and their meanings:
 
 is equal to (in programming languages) :
 
-(C++ || C# || C) : for (float z = [s]; z <= [e]; z += [i]) {// Add value of Ffunction(z) to the number}
+(C++ || C# || C) : for (float z = [s]; z <= [e]; z += [i]) {// Append value of Ffunction(z) to the number}
 
-(Rust) : let mut k = [s]; loop{/* Add value of Ffunction(k) to the number*/ if(k<=e){break;}k+=[i];}
+(Rust) : let mut k = [s]; loop{/* Append value of Ffunction(k) to the number*/ if(k<=e){break;}k+=[i];}
 
 (Python) : 
 float z = [s]
-while bool(z <= [e]):'''Add value of Ffunction(z) to the number;'''z+=i
+while bool(z <= [e]):'''Append value of Ffunction(z) to the number;'''z+=i
 
 (Fortran) :
 real :: z
 do z = [s], [e], [i]
-    ! Add value of Ffunction(z) to the number
+    ! Append value of Ffunction(z) to the number
+end do
+```
+
+Instead of a function, you can use a basal number, and choose indexes out of the collection (solid vertical bar, not split):
+```
+ z=s
+  এ i <baseT |collection|
+  e
+
+is equal to (in programming languages) :
+
+(C++ || C# || C) : for (float z = [s]; z <= [e]; z += [i]) {// Append digit at index z to the number}
+
+(Rust) : let mut k = [s]; loop{/* Append digit at index z to the number*/ if(k<=e){break;}k+=[i];}
+
+(Python) : 
+float z = [s]
+while bool(z <= [e]):'''Append digit at index z to the number;'''z+=i
+
+(Fortran) :
+real :: z
+do z = [s], [e], [i]
+    ! Append digit at index z to the number
 end do
 ```
