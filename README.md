@@ -1,10 +1,10 @@
 # Basal Library
 The library of files for my experiment of a branch of mathematics (basal).
 
-The code files are for proving (computationally) that the system is correct.
+The code files are for proving (computationally) that the system works, and is useful.
 
-The Python file is meant for sets of data to be put on a graph, and was programmed at 2AM.
-The C# file is meant for cryptography.
+The Python files is meant for sets of data to be put on a graph.
+The C# files is meant for cryptography.
 The C++ files are for specialised fields that do not contain all basal functions, for where other languages are not as good: ROCm, microcontrollers, cross-system desktop development; it is based on the python version.
 
     The directories 'list_syntax' and 'word_syntax' are libraries that use different syntaxes for their calculations, as well as input and output.
