@@ -7,7 +7,7 @@ Example, use '|' or '¦' to encapsulate:
 ```
 |<16T|
 
-10 = <10T 16
+10 = <AT 16
 ```
 
 Base Pointer:
