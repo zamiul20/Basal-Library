@@ -18,6 +18,14 @@ E.g. `<11T 1 , 0 , 2 , 9 , 3`
 
 `<11T` is the base, and `1 , 0 , 2 , 9 , 3` is the collection of characters / digits. Together, the value is Fourteen thousand, nine hundred and eighty five.
 
+### Array and Word syntaxes:
+Array and word syntaxes are ways to write a basal number
+
+E.g.
+```
+1234569 = 1 , 2 , 3 , 4 , 5 , 6 , 9
+```
+
 ### What determines equality:
 Equality between basal numbers comes from the value, not the base or how it is represented.
 
@@ -27,7 +35,7 @@ Therefore:
 <10গT 14, 29 = <10T 1, 6, 9 = <10T 169
 ```
 
-### Rules of operations
+### Rules of operations:
 The operating symbol's rules are the same as regular maths, and operations are carried out by converting both numbers to the same base (if they aren't already), performing the operation, then converting the result to the target base (or you could convert both numbers to the target base before performing the operation)
 
 E.g.
@@ -40,13 +48,13 @@ E.g.
 ### Gist of what the basal attributes do:
 The base's value determines the value exponentiated by the index.
 
-The polarity determines the effect of every other digit, positionally. (See Documentation/Base_Attributes/Polarity.md)
+The polarity determines the effect of every other digit, positionally. (See [Polarity](Documentation/Base_Attributes/Polarity.md))
 
 The format sets the base's digit-limit rule as true or false. Regular - True ; Discrete - False
 
-The echo determines the order of the digits, algorithm to move them to and back is positional. (See Documentation/Base_Attributes/Echo.md)
+The echo determines the order of the digits, algorithm to move them to and back is positional. (See [Echo](Documentation/Base_Attributes/Echo.md))
 
-The velocity determines the change in index per digit. (See Documentation/Base_Attributes/Velocity.md)
+The velocity determines the change in index per digit. (See [Velocity](Documentation/Base_Attributes/Velocity.md))
 
 The direction determines if the MSD (Most Significant Digit) is the left-most, or the right-most.
 <10T 123 = 123 = 321 T10>
@@ -54,14 +62,18 @@ The direction determines if the MSD (Most Significant Digit) is the left-most, o
 ### What can be a digit:
 A digit is any value in the collection, represented by the base of the plane (default is <10T - denary).
 
-A digit is usually the characters 0-9 and some letters.
+A digit is usually the characters 0-9 and letters (both syntaxes).
 
 A digit could also be a dual number, a complex number, a variable, another equation, a fraction, a decimal, or the output of a function (requires array syntax).
 
 E.g.
-
+```
 let f(x) = 3x + 5
 
-<10গT y, y, f(7), 1 = <16T 2, 3, 1
+<10গT y, y, f(7), 1.2 = <16T 2, 3, 1.2
 
 y = 3
+```
+
+### Basal fabrication:
+You can use any function / equation to make a basal number, which then gives a value
