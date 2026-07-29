@@ -4,6 +4,12 @@ There are 2 ways of converting bases
 1. Converting to another base
 2. Converting to another base from a defined base
 
+Get the value of the number you want to convert, and calculate the digit collection in the following order:
+1. Base value and velocity (percieve it as {base value ^ velocity})
+2. Polarity
+3. Direction
+4. Echo
+
 For converting bases, the symbol to use as an operator is `র`
 
 First Method : Converting an arbitary base to another, by using the input number's base 
