@@ -47,6 +47,6 @@ Attach / concatenate the top row to the bottom with `জ` in the middle, to sign
 <R+ল+3T 95.3জ012678 = <R+ল+3T 9, 5, ., 3, জ, 0, 1, 2, 6, 7, 8 = 98765.3210
 
 ```
-
+To change a number back to having no echo, do the literal reverse of the function above.
 
 Originally, this was meant to easily calculate depolarised numbers mentally, and I used a ripple of +1 or -1, but I figured that it would well in cryptography if there could be other parameters.
