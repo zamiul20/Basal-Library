@@ -6,3 +6,7 @@ Prerequisites are:
 3. python package of pyarmor installed
 
 Basal functions are included in the file, not externally needed.
+
+Basal functions are included in the file, not externally needed.
+
+How to run: `python graph.py`, then follow the instructions
