@@ -25,8 +25,8 @@ The letter 'h' can be replaced with anything else, apart from just a number and 
 Referring to a base:
 ```
 Of any base: {Discreted / blank},
-             {Negativity / Double Negativity / blank, },
-             {Base of [base_value]},
+             {Negative / Double Negative / blank, },
+             {Base [base_value]},
              {Velocity of [velocity] / blank}
 
 Example:
