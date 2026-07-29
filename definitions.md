@@ -1,5 +1,6 @@
 # Definitions
 
+## Fundamentals:
 ### What is a base:
 A base is a collection of attributes that determine the rules of how a value is represented.
 
@@ -31,6 +32,11 @@ A Basal number is a value, but that value is represented via the base, which is 
 E.g. `<11T 1 , 0 , 2 , 9 , 3`
 
 `<11T` is the base, and `1 , 0 , 2 , 9 , 3` is the collection of characters / digits. Together, the value is Fourteen thousand, nine hundred and eighty five.
+
+Referring to any base: {Discreted / blank},
+             {Negative / Double Negative / blank, },
+             {Base [base_value]},
+             {Velocity of [velocity] / blank}
 
 ### Array and Word syntaxes:
 Array and word syntaxes are ways to write a basal number
@@ -75,8 +81,9 @@ let f(x) = 3x + 5
 y = 3
 ```
 
-### Basal fabrication:
-You can use any function / equation to make a basal number, with a ranged method. (See [Fabrication](Documentation/Other_Functions/fabrication.md))
+## Functions:
+### [Basal fabrication](Documentation/Other_Functions/fabrication.md):
+You can use any function / equation to make a basal number, with a ranged method (similar to a for-loop).
 
 ### Basal polynomials:
 With the base's value as a variable, you can make the number a polynomial function
@@ -94,3 +101,36 @@ You can also put all bases on either side of the number
 
 Calculation: <10গT 143327232, 134369280, 141087744, 120932352, 11337408, 76527504, 331619184, 679181598         
 ```
+
+### [Singularitive operations](Documentation/Other_Functions/singularity.md):
+Digit-wise operations on numbers.
+
+### [Shifting](Documentation/Other_Functions/shifts.md):
+You can move the decimal point of a number, changing its value without. This does not discard digits.
+
+## [Ease of use](Documentation/Notation/Ease_of_use.md):
+### Base of plane:
+The workspace / plane can have a base that does not need defining, acts as the default.
+### Base Pointer:
+You can set a base as a variable to be accessed throughout the plane.
+### Charactersets:
+A characterset can be defined for the plane.
+
+## Conversions:
+
+### [Of Basal Numbers](Documentation/Converting_Bases/converting.md):
+Get the value of the number you want to convert, and calculate the digit collection in the following order:
+1. Base value and velocity (percieve it as {base value ^ velocity})
+2. Polarity
+3. Direction
+4. Echo
+
+### First Method:
+Converting an arbitary base to another, by using the input number's base 
+### Second Method:
+Converting an arbitary base to another, by using a given base (has to be discrete), converting the input number as if it were that
+
+### For attributes:
+1. [Acceleration](Documentation/Converting_Bases/acceleration.md) (change of velocity)
+2. [Depolarisation](Documentation/Converting_Bases/depolarising.md) (change of polarity)
+3. [Rippllification](Documentation/Converting_Bases/rippllification.md) (change of ripple and echo)
