@@ -11,6 +11,20 @@ Attributes:
 5. Velocity
 6. Direction
 
+### Gist of what the basal attributes do:
+The base's value determines the value exponentiated by the index.
+
+The polarity determines the effect of every other digit, positionally. (See [Polarity](Documentation/Base_Attributes/Polarity.md))
+
+The format sets the base's digit-limit rule as true or false. Regular - True ; Discrete - False
+
+The echo determines the order of the digits, algorithm to move them to and back is positional. (See [Echo](Documentation/Base_Attributes/Echo.md))
+
+The velocity determines the change in index per digit. (See [Velocity](Documentation/Base_Attributes/Velocity.md))
+
+The direction determines if the MSP (Most Significant Position) is the left-most, or the right-most.
+<10T 123 = 123 = 321 T10>
+
 ### What is a Basal number:
 A Basal number is a value, but that value is represented via the base, which is found on the plane (default), or is following / trailing it.
 
@@ -45,20 +59,6 @@ E.g.
 <3গT 15, 7, 6, 4, 0 x <3T 2, 1, 2, 0 = <3T 12011010200 = <10T 101430
 ```
 
-### Gist of what the basal attributes do:
-The base's value determines the value exponentiated by the index.
-
-The polarity determines the effect of every other digit, positionally. (See [Polarity](Documentation/Base_Attributes/Polarity.md))
-
-The format sets the base's digit-limit rule as true or false. Regular - True ; Discrete - False
-
-The echo determines the order of the digits, algorithm to move them to and back is positional. (See [Echo](Documentation/Base_Attributes/Echo.md))
-
-The velocity determines the change in index per digit. (See [Velocity](Documentation/Base_Attributes/Velocity.md))
-
-The direction determines if the MSD (Most Significant Digit) is the left-most, or the right-most.
-<10T 123 = 123 = 321 T10>
-
 ### What can be a digit:
 A digit is any value in the collection, represented by the base of the plane (default is <10T - denary).
 
@@ -76,4 +76,21 @@ y = 3
 ```
 
 ### Basal fabrication:
-You can use any function / equation to make a basal number, which then gives a value
+You can use any function / equation to make a basal number, with a ranged method. (See [Fabrication](Documentation/Other_Functions/fabrication.md))
+
+### Basal polynomials:
+With the base's value as a variable, you can make the number a polynomial function
+
+E.g. <xT 1, -6, 2, 0, .7 = x^3 - 6x^2 + 2x + 7x^-1
+
+### Basal stacking:
+You can stack bases onto a single number, where the number's digit values will be the individual product of each digit's indexes from all bases acting on it. The bases can be of any combination of attributes.
+
+E.g.
+```
+You can also put all bases on either side of the number
+
+<4দগT <3গT 4, 5, 7, 8, 1, 9, 52, 142 T9গ> = <4দগT <3গT T9গ> 4, 5, 7, 8, 1, 9, 52, 142
+
+Calculation: <10গT 143327232, 134369280, 141087744, 120932352, 11337408, 76527504, 331619184, 679181598         
+```
