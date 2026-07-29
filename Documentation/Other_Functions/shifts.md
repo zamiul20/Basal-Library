@@ -19,7 +19,7 @@ If the decimal point doesn't exist, place it where it would be if it existed
 
 Symbol for shifting - `প`:
 ```
-[shift count] প [target]
+[target] প [shift count]
 
 e.g.  654496.457474 প 5 = 65449645747.4
      654496.457474 প -1 = 65449.6457474
