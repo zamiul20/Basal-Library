@@ -113,12 +113,10 @@ public partial class Calc_Page : ContentPage
 
             case "firnum":
                 firnum_disp = leinput.Text;
-                firnum = Red__Sea(' ' + firnum_disp + ' ');
                 break;
 
             case "secnum":
                 secnum_disp = leinput.Text;
-                secnum = Red__Sea(' ' + secnum_disp + ' ');
                 break;
 
             case "ansbas":
@@ -267,6 +265,7 @@ public partial class Calc_Page : ContentPage
 
     public void setbas()
     {
+        firnum = Red__Sea(' ' + firnum_disp + ' '); secnum = Red__Sea(' ' + secnum_disp + ' ');
 
         makbas();
 
