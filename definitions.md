@@ -122,8 +122,8 @@ A characterset can be defined for the plane.
 Get the value of the number you want to convert, and calculate the digit collection in the following order:
 1. Base value and velocity (percieve it as {base value ^ velocity})
 2. Polarity
-3. Direction
-4. Echo
+3. Echo
+4. Direction
 
 ### First Method:
 Converting an arbitary base to another, by using the input number's base 
