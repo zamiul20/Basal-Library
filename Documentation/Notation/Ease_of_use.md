@@ -30,7 +30,7 @@ Of any base: {Discreted / blank},
              {Velocity of [velocity] / blank}
 
 Example:
-<10 দ গ স 0.5T (Discreted Double Negative base of 10 with a velocity of 0.5)
+<10 দ গ স 0.5T (Discreted Double Negative base 10 with a velocity of 0.5)
 ```
 
 Referring to a part of a number:
