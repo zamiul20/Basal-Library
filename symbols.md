@@ -9,7 +9,7 @@
 -ম (a) - Negative-Biased Machined Negative
 গ - Discrete
 +ল a - Positive Echo of Ripple {a}
-+ল a - Negative Echo of Ripple {a}
+-ল a - Negative Echo of Ripple {a}
 স a - Velocity of value a
 ```
 ## Functions:
