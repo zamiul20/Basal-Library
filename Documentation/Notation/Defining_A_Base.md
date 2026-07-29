@@ -6,7 +6,7 @@ Attributes (one from each row, ordered from rows 1->5), with [a] as the attribut
 1. Type : `The base itself`;
 2. Polarity : Regular , Negative `ঋ` , Double Negative `দ` , Positive-Biased Machined Negative `+ম (a)` , Negative-Biased Machined Negative `-ম (a)` ;
 3. Format : Regular , Discrete `গ`;
-4. Echo : Regular , Positive `+ল a` , Negative `+ল a`;
+4. Echo : Regular , Positive `+ল a` , Negative `-ল a`;
 5. Velocity : 1 , Anything else `স a`
 
 Common Bases that are used:
