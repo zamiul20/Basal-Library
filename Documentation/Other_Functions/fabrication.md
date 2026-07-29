@@ -35,7 +35,7 @@ end do
 
 Instead of a function, you can use a basal number, and choose indexes out of the collection (solid vertical bar, not split):
 ```
- z=s
+  s
   এ i <baseT |collection|
   e
 
