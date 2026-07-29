@@ -11,7 +11,7 @@ Example, use '|' or '¦' to encapsulate:
 ```
 
 Base Pointer:
-You can set a base as a variable, accessed and defined with `ণ`, use '|' or '¦' to encapsulate
+You can set a base as a variable, accessed and defined with `ণ`, use `|` or `¦` to encapsulate
 
 Example:
 ```
