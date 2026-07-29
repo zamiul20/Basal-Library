@@ -52,5 +52,6 @@ Or: (Works for any velocity, also the method of the code files) for every digit 
    3     7  --> +1   4   0   6  - Column addition
                  2   7   6   3  -> <10দT 2763 = <10T 1357
 ```
+To change a number back to having a regular polarity, do the literal reverse of the first method above, or calculatre and calculate the digit collection (convert).
 
 NOTE: for Fractal bases (of both types), use array syntax
