@@ -313,6 +313,45 @@ class Basal:
             if bool(po == 0):return outout
             else: return (0-outout)
 
+    def expan(num : list, asbas, debas):
+        outout = 0 ; l = len(num)
+        asarr = [j for j in range(l)]
+        dearr = [j for j in range(l)]
+
+        if bool(asbas.echo != 2) : Basal.echor(asbas.ripple, asbas.echo, asarr)
+        if bool(debas.echo != 2) : Basal.echor(debas.ripple, debas.echo, dearr)
+
+        q = 0 ; pos = num.index('.')
+
+        if bool(asbas.polar == debas.polar):
+            for z in range(l):
+                if bool(pos == z) : continue
+                outout += num[z] * asbas.base_value, asarr[q] * asbas.velocity * debas.base_value, dearr[l - (q + 1)] * debas.velocity
+                q+=1
+
+        elif bool(asbas.polar + debas.polar == 1):
+            for z in range(l):
+                if bool(pos == z) : continue
+                outout -= num[z] * asbas.base_value, asarr[q] * asbas.velocity * debas.base_value, dearr[l - (q + 1)] * debas.velocity
+                q+=1
+
+        else:
+            dpo = 2 ; apo = 2
+            if (asbas.polar == 1): apo = 0
+            elif (asbas.polar == 0): apo = 1
+            if (debas.polar == 1): dpo = 0
+            elif (debas.polar == 0): dpo = 1
+
+
+            for z in range(l):
+                if bool(pos == z) : continue
+                if bool((l - q) % 2 == dpo or q % 2 == apo):
+                    outout -= num[z] * asbas.base_value, asarr[q] * asbas.velocity * debas.base_value, dearr[l - (q + 1)] * debas.velocity
+                else: outout += num[z] * asbas.base_value, asarr[q] * asbas.velocity * debas.base_value, dearr[l - (q + 1)] * debas.velocity
+                q+=1
+
+        return outout
+
     def expor(num : float, expo : float) -> float:
         if bool(abs(num) != num): 
             if bool(expo % 2 == 1) : return float(num ** expo)
