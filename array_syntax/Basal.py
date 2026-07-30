@@ -342,7 +342,6 @@ class Basal:
             if (debas.polar == 1): dpo = 0
             elif (debas.polar == 0): dpo = 1
 
-
             for z in range(l):
                 if bool(pos == z) : continue
                 if bool((l - q) % 2 == dpo or q % 2 == apo):
