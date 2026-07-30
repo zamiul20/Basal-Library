@@ -585,9 +585,6 @@ namespace Calculator
                 dearr[z] = z;
             }
 
-            Console.WriteLine(String.Join(' ', asarr));
-            Console.WriteLine(String.Join(' ', dearr));
-
             if (asbas.echo != 2) asarr = asbas.echor(asarr, asbas.echo, asbas.ripple, 2);
             if (debas.echo != 2) dearr = debas.echor(dearr, debas.echo, debas.ripple, 2);
 
