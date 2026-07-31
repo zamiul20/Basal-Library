@@ -280,7 +280,7 @@ public partial class Calc_Page : ContentPage
         firnum_but.Text = "First Number - <10T " + basar[0].value.ToString();
         secnum_but.Text = "Second Number - <10T " + basar[1].value.ToString();
 
-        basar[2] = new Basal(basar[2].base_value, basar[2].polar, -8, basar[2].echo, basar[2].ripple, basar[2].velocity);
+        basar[2] = new Basal(basar[2].base_value, basar[2].polar, 0, basar[2].echo, basar[2].ripple, basar[2].velocity);
     }
 
     public void giv_ans()
@@ -298,9 +298,9 @@ public partial class Calc_Page : ContentPage
                 po = 1;
             }
 
-            basar[2].number = tmp.notobasten(basar[2].value, basar[2].base_value, basar[2].velocity, 69);
+            basar[2].number = tmp.notobasten(basar[2].value, basar[2].base_value, basar[2].velocity, 70);
 
-            if (basar[2].polar != 2) basar[2].number = tmp.depolaris(basar[2].number, basar[2].base_value, basar[2].velocity, basar[2].polar, 69);
+            if (basar[2].polar != 2) basar[2].number = tmp.depolaris(basar[2].number, basar[2].base_value, basar[2].velocity, basar[2].polar, 70);
             if (basar[2].echo != 2) basar[2].number = tmp.echor(basar[2].number, basar[2].echo, basar[2].ripple, 0);
 
             if (po == 0)
