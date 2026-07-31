@@ -191,15 +191,15 @@ public partial class Convert_Page : ContentPage
             }
             else { indicat.Text = "Input Base not defined"; }
 
-            leinbas = new Basal(Red__Sea(innum), leinbas.base_value, leinbas.polar, -8, leinbas.echo, leinbas.ripple, leinbas.velocity);
+            leinbas = new Basal(Red__Sea(innum), leinbas.base_value, leinbas.polar, 0, leinbas.echo, leinbas.ripple, leinbas.velocity);
 
             innum_but.Text = "Input Number - <10T " + leinbas.value.ToString();
 
             Basal tmp = new Basal();
-            leoutbas.number = tmp.notobasten(leinbas.value, leoutbas.base_value, leoutbas.velocity, 69);
+            leoutbas.number = tmp.notobasten(leinbas.value, leoutbas.base_value, leoutbas.velocity, 70);
 
             if (leoutbas.polar != 2)
-                leoutbas.number = tmp.depolaris(leoutbas.number, leoutbas.base_value, leoutbas.velocity, leoutbas.polar, 69);
+                leoutbas.number = tmp.depolaris(leoutbas.number, leoutbas.base_value, leoutbas.velocity, leoutbas.polar, 70);
             if (leoutbas.echo != 2)
                 leoutbas.number = tmp.echor(leoutbas.number, leoutbas.echo, leoutbas.ripple, 0);
 
