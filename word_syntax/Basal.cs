@@ -565,11 +565,11 @@ namespace Calculator
             ripple = rip;
             velocity = vel;
 
-            number = notobasten(num, bass, vel, 69);
+            number = notobasten(num, bass, vel, 70);
 
             if (polar != 2)
             {
-                number = depolaris(number, bass, vel, pol, 69);
+                number = depolaris(number, bass, vel, pol, 70);
             }
 
             if (echo != 2)
