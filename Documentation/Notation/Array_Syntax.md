@@ -12,4 +12,4 @@ An example using Hexadecimal - <16T:
 <10T 178 = <16T B2 = <16T 11, 2
 ```
 
-Another reason to use this syntax is for use with the basal calculator apps, updated code, simplifying polynomials, and to use variables and decimals as digits.
+In array syntax, anything is allowed in the digits, even entire equations, outputs of a function, decimal numbers, complex numbers, dual numbers, a basal polynomial (encapsulated by '[]' or '{}' or '()' or any other parentheses).
