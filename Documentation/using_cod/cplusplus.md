@@ -5,7 +5,7 @@ The Basal.cpp file in /array_syntax/ is under development, and may not work as i
 Constructor - `Basal()` - makes an object with default parameters, entered parameters from collection to value or value to collection
 
 Functions (using ebass as the object of class Basal), not all functions are in both files, read parameters of function to know what to input:
-1. ebass.expor() : exponentiation of a collection to a power (mostly)
+1. ebass.expor() : exponentiation of a value to a power (mostly)
 2. ebass.tobasten() : returns the value of a collection
 3. ebass.notobasten() : returns the collection of a value
 4. ebass.polaris() : returns the value of a depolarised collection
