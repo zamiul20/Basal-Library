@@ -1,4 +1,4 @@
-namespace Calculator
+namespace Basal
 {
     internal class Basal
     {
