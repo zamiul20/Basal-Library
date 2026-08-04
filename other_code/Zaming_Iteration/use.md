@@ -1,4 +1,4 @@
-Zaming_Iteration.zip contains a compressed python file that can be run on the command line to generate iterative zaming graphs (one number cycled with the encryption function).
+Zaming_Iteration.zip contains a compressed python file that can be run on the command line to generate iterative zaming graphs (one number cycled with the encryption function multiple times).
 
 Prerequisites are:
 1. python installed, version of at least 3.12
