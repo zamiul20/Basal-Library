@@ -7,14 +7,8 @@ namespace Basal
         {
             if (num < 0)
             {
-                if (expo % 2 == 1)
-                {
-                    return (0 - Math.Pow(Math.Abs(num), expo));
-                }
-                else
-                {
-                    return (Math.Pow(Math.Abs(num), expo));
-                }
+                if (expo % 2 == 1) return (0 - Math.Pow(Math.Abs(num), expo));
+                else return (Math.Pow(Math.Abs(num), expo));
             }
             else
             {
@@ -45,16 +39,14 @@ namespace Basal
                 int pos = Array.IndexOf(num, '.');
                 for (int z = 0; z < num.Length; z++)
                 {
-                    if (Object.Equals(num[z], '.')) { pos++; continue; }
+                    if (Object.Equals(num[z], '.')) pos++; continue;
                     outout += expor(bass, (z - pos) * velocity) * Convert.ToDouble(num[z]);
                 }
             }
             else
             {
                 for (int z = 0; z < num.Length; z++)
-                {
                     outout += expor(bass, z * velocity) * Convert.ToDouble(num[z]);
-                }
             }
 
             if (po == 0) return outout;
@@ -102,30 +94,17 @@ namespace Basal
 
                 for (int z = 0; z < (accuracy - ceil); z++)
                 {
-                    if (num == 0)
-                    {
-                        return outout.ToArray<object>();
-                    }
+                    if (num == 0) return outout.ToArray<object>();
                     double index = 1d;
-                    try
-                    {
-                        index = expor(bass, (0 - (z + 1)) * velocity);
-                    }
-                    catch
-                    {
-                        break;
-                    }
+                    try { index = expor(bass, (0 - (z + 1)) * velocity); }
+                    catch { break; }
 
                     int t = (int)(Math.Floor(num / index));
-
-                    if (t >= 1)
-                    {
-                        num -= t * index;
-                    }
+                    if (t >= 1) num -= t * index;
                     outout.Add(t);
                 }
                 if (statis == 0) return outout.ToArray<object>();
-                else { object[] x = outout.ToArray<object>(); Array.Reverse(x); return x; }
+                else object[] x = outout.ToArray<object>(); Array.Reverse(x); return x;
             }
         }
 
@@ -144,13 +123,9 @@ namespace Basal
                 if (Object.Equals('.', num[z])) continue;
                 q--;
                 if (z % 2 == mod)
-                {
                     outout += Convert.ToDouble(num[z]) * expor(bass, (q * velocity));
-                }
                 else
-                {
                     outout -= Convert.ToDouble(num[z]) * expor(bass, (q * velocity));
-                }
             }
 
             return outout;
@@ -202,10 +177,8 @@ namespace Basal
             int rx = right.Length; int rount = rx;
             int lx = left.Length; int lount = lx;
 
-            if (rip > 0)
-                Array.Reverse(left);
-            else
-                Array.Reverse(right);
+            if (rip > 0) Array.Reverse(left);
+            else Array.Reverse(right);
 
             if (mode == 1) fire = "780";
 
@@ -216,22 +189,18 @@ namespace Basal
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
                         if (rx == 0) break;
-
                         outout.Add(right[rount - rx]);
                         rx--;
-                    }
-                    fire = "780";
+                    }fire = "780";
                 }
                 else if (fire == "780")
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
                         if (lx == 0) break;
-
                         outout.Add(left[lount - lx]);
                         lx--;
-                    }
-                    fire = "I";
+                    }fire = "I";
                 }
             }
 
@@ -251,10 +220,8 @@ namespace Basal
             int rx = right.Length; int rount = rx;
             int lx = left.Length; int lount = lx;
 
-            if (rip > 0)
-                Array.Reverse(left);
-            else
-                Array.Reverse(right);
+            if (rip > 0) Array.Reverse(left);
+            else Array.Reverse(right);
 
             if (mode == 1) fire = "780";
 
@@ -265,22 +232,18 @@ namespace Basal
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
                         if (rx == 0) break;
-
                         outout.Add(right[rount - rx]);
                         rx--;
-                    }
-                    fire = "780";
+                    }fire = "780";
                 }
                 else if (fire == "780")
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
                         if (lx == 0) break;
-
                         outout.Add(left[lount - lx]);
                         lx--;
-                    }
-                    fire = "I";
+                    }fire = "I";
                 }
             }
 
@@ -297,9 +260,9 @@ namespace Basal
 
             while (x >= 0)
             {
-                if (fire == "780") { fire = "I"; }
-                else if (fire == "I") { fire = "780"; }
-                else { return ["How?"]; }
+                if (fire == "780") fire = "I";
+                else if (fire == "I") fire = "780";
+                else return ["How?"];
 
                 for (int z = 0; z < ripl; z++)
                 {
@@ -308,15 +271,13 @@ namespace Basal
                         if (x == 0) break;
                         else left_arr.Add(num[count - x]);
                     }
-
                     else if (fire == "780")
                     {
                         if (x == 0) break;
                         else right_arr.Add(num[count - x]);
-                    }
-                    x--;
+                    }x--;
                 }
-                if (x == 0) { break; }
+                if (x == 0) break;
             }
 
             left_arr.Reverse();
@@ -424,82 +385,37 @@ namespace Basal
         public string? disp()
         {
             string outout = $"<{base_value}";
-
             if (polar != 2)
             {
-                if (polar == 0)
-                {
-                    outout += "ঋ";
-                }
-                else if (polar == 1)
-                {
-                    outout += "দ";
-                }
+                if (polar == 0) outout += "ঋ";
+                else if (polar == 1) outout += "দ";
             }
-            if (discretion != 0)
-            {
-                outout += "গ";
-            }
+            if (discretion != 0) outout += "গ";
             if (echo != 2)
             {
-                if (echo == 0)
-                {
-                    outout += $"+ল{ripple}";
-                }
-                else if (echo == 1)
-                {
-                    outout += $"-ল{ripple}";
-                }
+                if (echo == 0) outout += $"+ল{ripple}";
+                else if (echo == 1) outout += $"-ল{ripple}";
             }
-            if (velocity != 1)
-            {
-                outout += $"স{velocity}";
-            }
-
+            if (velocity != 1) outout += $"স{velocity}";
             display = outout + "T";
-
             return display;
         }
         public string? bisp()
         {
             string outout = "T";
-
-            if (velocity != 1)
-            {
-                outout += $"স{velocity}";
-            }
-
+            if (velocity != 1) outout += $"স{velocity}";
             if (echo != 2)
             {
-                if (echo == 0)
-                {
-                    outout += $"+ল{ripple}";
-                }
-                else if (echo == 1)
-                {
-                    outout += $"-ল{ripple}";
-                }
+                if (echo == 0) outout += $"+ল{ripple}";
+                else if (echo == 1) outout += $"-ল{ripple}";
             }
-
-            if (discretion != 0)
-            {
-                outout += "গ";
-            }
-
+            if (discretion != 0) outout += "গ";
             if (polar != 2)
             {
-                if (polar == 0)
-                {
-                    outout += "ঋ";
-                }
-                else if (polar == 1)
-                {
-                    outout += "দ";
-                }
+                if (polar == 0) outout += "ঋ";
+                else if (polar == 1) outout += "দ";
             }
-
             bisplay = outout + $"{base_value}>";
-
             return bisplay;
         }
 
@@ -509,7 +425,7 @@ namespace Basal
 
         public double disintegrate(object[] num, Basal inbas)
         {
-            if (inbas.echo != 2) { num = inbas.unechor(inbas.ripple, num, inbas.echo); }
+            if (inbas.echo != 2) num = inbas.unechor(inbas.ripple, num, inbas.echo);
 
             if (inbas.polar != 2)
             {
@@ -517,7 +433,7 @@ namespace Basal
 
                 for (int z = 0; z < l; z++)
                 {
-                    try { if ((char)num[z] == '.') { continue; } }
+                    try { if ((char)num[z] == '.') continue; }
                     catch
                     {
                         q--;
@@ -548,7 +464,7 @@ namespace Basal
                     int pos = Array.IndexOf(num, '.');
                     for (int z = 0; z < num.Length; z++)
                     {
-                        if (Object.Equals(num[z], '.')) { pos++; continue; }
+                        if (Object.Equals(num[z], '.')) pos++; continue;
                         outout += expor(inbas.base_value, (z - pos - 1) * inbas.velocity) * Convert.ToDouble(num[z]) * z;
                     }
                 }
@@ -560,10 +476,8 @@ namespace Basal
                     }
                 }
 
-                if (po == 0)
-                    return outout;
-                else
-                    return 0 - outout;
+                if (po == 0) return outout;
+                else return 0 - outout;
             }
         }
 
@@ -671,18 +585,9 @@ namespace Basal
             ripple = rip;
             velocity = vel;
 
-            if (echo != 2)
-            {
-                num = unechor(rip, num, echo);
-            }
-            if (pol != 2)
-            {
-                value = polaris(num, bass, vel, pol);
-            }
-            else
-            {
-                value = tobasten(num, bass, vel);
-            }
+            if (echo != 2) num = unechor(rip, num, echo);
+            if (pol != 2) value = polaris(num, bass, vel, pol);
+            else value = tobasten(num, bass, vel);
         }
 
         public Basal(
@@ -722,15 +627,9 @@ namespace Basal
 
             number = notobasten(num, bass, vel, 70);
 
-            if (polar != 2)
-            {
-                number = depolaris(number, bass, vel, pol, 70);
-            }
+            if (polar != 2) number = depolaris(number, bass, vel, pol, 70);
 
-            if (echo != 2)
-            {
-                number = echor(number, echo, rip, 0);
-            }
+            if (echo != 2) number = echor(number, echo, rip, 0);
         }
         #endregion
     }
