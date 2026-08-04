@@ -12,19 +12,10 @@ namespace Calculator
         {
             if (num < 0)
             {
-                if (expo % 2 == 1)
-                {
-                    return (0 - Math.Pow(Math.Abs(num), expo));
-                }
-                else
-                {
-                    return (Math.Pow(Math.Abs(num), expo));
-                }
+                if (expo % 2 == 1) return (0 - Math.Pow(Math.Abs(num), expo));
+                else return (Math.Pow(Math.Abs(num), expo));
             }
-            else
-            {
-                return (Math.Pow(num, expo));
-            }
+            else return (Math.Pow(num, expo));
         }
         public static string revstr(string stringInput)
         {
@@ -50,7 +41,6 @@ namespace Calculator
             }
             decimal outout = 0;
             num = revstr(num);
-
             if (num.Contains('.'))
             {
                 int pos = num.IndexOf('.');
@@ -58,21 +48,11 @@ namespace Calculator
                 string right = num.Substring(pos + 1);
 
                 for (int z = 0; z < left.Length; z++)
-                {
                     outout += (decimal)expor(bass, (z * velocity)) * Cc(left[z]);
-                }
                 for (int z = 0; z < right.Length; z++)
-                {
                     outout += (decimal)expor(bass, ((z + 1) * velocity)) * Cc(right[z]);
-                }
             }
-            else
-            {
-                for (int z = 0; z < num.Length; z++)
-                {
-                    outout += (decimal)expor(bass, (z * velocity)) * Cc(num[z]);
-                }
-            }
+            else for (int z = 0; z < num.Length; z++) outout += (decimal)expor(bass, (z * velocity)) * Cc(num[z]);
 
             if (po == 0) return outout;
             else return 0 - outout;
@@ -93,13 +73,8 @@ namespace Calculator
             {
                 int q = ceil - (z + 1);
                 decimal index = (decimal)expor(bass, (q * velocity));
-
                 int t = (int)(Math.Floor(num / index));
-
-                if (t >= 1)
-                {
-                    num -= (t * index);
-                }
+                if (t >= 1) num -= (t * index);
                 outout += Vc(t);
             }
 
@@ -111,29 +86,14 @@ namespace Calculator
             else
             {
                 outout += '.';
-
                 for (int z = 0; z < (accuracy - ceil); z++)
                 {
-                    if (num == 0)
-                    {
-                        return outout;
-                    }
+                    if (num == 0) return outout;
                     decimal index = 1M;
-                    try
-                    {
-                        index = (decimal)expor(bass, (0 - (z + 1)) * velocity);
-                    }
-                    catch
-                    {
-                        break;
-                    }
-
+                    try { index = (decimal)expor(bass, (0 - (z + 1)) * velocity); }
+                    catch { break; }
                     int t = (int)(Math.Floor(num / index));
-
-                    if (t >= 1)
-                    {
-                        num -= (t * index);
-                    }
+                    if (t >= 1) num -= (t * index);
                     outout += Vc(t);
                 }
                 if (statis == 0) return outout;
@@ -150,38 +110,24 @@ namespace Calculator
             decimal outout = 0m;
             int l = num.Length;
             int q = l;
-
             for (int z = 0; z < l; z++)
             {
                 if (num[z] == '.') continue;
-
                 q--;
-                if (z % 2 == mod)
-                {
-                    outout += (decimal)(Cc(num[z]) * expor(bass, (q * velocity)));
-                }
-                else
-                {
-                    outout -= (decimal)(Cc(num[z]) * expor(bass, (q * velocity)));
-                }
+                if (z % 2 == mod) outout += (decimal)(Cc(num[z]) * expor(bass, (q * velocity)));
+                else outout -= (decimal)(Cc(num[z]) * expor(bass, (q * velocity)));
             }
-
             return outout;
         }
         public string depolaris(string num, double bass, double velocity, int mod, int accuracy)
         {
             decimal abls = 0;
-
             string x = revstr(num);
-
             int z = 0;
-            if (x.Contains('.'))
-                z = x.IndexOf('.') - x.Length;
-
+            if (x.Contains('.')) z = x.IndexOf('.') - x.Length;
             for (int z_2 = 0; z_2 < x.Length; z_2++)
             {
                 if (x[z_2] == '.') continue;
-
                 z += 1;
                 if (z % 2 == mod)
                 {
@@ -192,7 +138,6 @@ namespace Calculator
                     }
                 }
             }
-
             return notobasten(tobasten(num, bass, velocity) + abls, bass, velocity, accuracy);
         }
         #endregion
@@ -204,7 +149,6 @@ namespace Calculator
             string outout = "";
             int r = Math.Abs(rip);
             int nlen = num.Length - 1; int mid;
-
             try { mid = num.IndexOf('জ'); }
             catch { return "Error"; }
 
@@ -215,41 +159,30 @@ namespace Calculator
             int lx = left.Length;
             int rount = rx;
             int lount = lx;
-
-            if (rip > 0)
-            {
-                left = revstr(left);
-            }
-            else
-            {
-                right = revstr(right);
-            }
-
-            if (mode == 1) { fire = "780"; }
-
+            if (rip > 0) left = revstr(left);
+            else right = revstr(right);
+            if (mode == 1) fire = "780";
             for (int z = 0; z < nlen; z++)
             {
                 if (fire == "I")
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
-                        if (rx == 0) { break; }
+                        if (rx == 0) break;
 
                         outout = $"{outout}{right[(rount - rx)]}";
                         rx--;
-                    }
-                    fire = "780";
+                    }fire = "780";
                 }
                 else if (fire == "780")
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
                     {
-                        if (lx == 0) { break; }
+                        if (lx == 0) break;
 
                         outout = $"{outout}{right[(lount - lx)]}";
                         lx--;
-                    }
-                    fire = "I";
+                    }fire = "I";
                 }
             }
 
@@ -260,7 +193,6 @@ namespace Calculator
             string outout = "";
             int r = Math.Abs(rip);
             int nlen = num.Length - 1;
-
             string left = num.Substring(0, mid);
             string right = num.Substring(mid + 1);
             string fire = "I";
@@ -269,40 +201,28 @@ namespace Calculator
             int rount = rx;
             int lount = lx;
 
-            if (rip > 0)
-            {
-                left = revstr(left);
-            }
-            else
-            {
-                right = revstr(right);
-            }
+            if (rip > 0) left = revstr(left);
+            else right = revstr(right);
 
-            if (mode == 1) { fire = "780"; }
+            if (mode == 1) fire = "780";
 
             for (int z = 0; z < nlen; z++)
             {
                 if (fire == "I")
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
-                    {
-                        if (rx == 0) { break; }
-
+                    {if (rx == 0) break;
                         outout = $"{outout}{right[(rount - rx)]}";
                         rx--;
-                    }
-                    fire = "780";
+                    }fire = "780";
                 }
                 else if (fire == "780")
                 {
                     for (int z_2 = 0; z_2 < r; z_2++)
-                    {
-                        if (lx == 0) { break; }
-
+                    {if (lx == 0) break;
                         outout = $"{outout}{right[(lount - lx)]}";
                         lx--;
-                    }
-                    fire = "I";
+                    }fire = "I";
                 }
             }
 
@@ -317,69 +237,40 @@ namespace Calculator
             int count = x;
             string fire = "I";
             string placehold = "জ";
-
-            if (uni == 1)
-            {
-                placehold = "&";
-            }
-            else if (uni == 2)
-            {
-                placehold = "";
-            }
+            if (uni == 1) placehold = "&";
+            else if (uni == 2) placehold = "";
 
             while (x >= 0)
             {
-                if (fire == "780") { fire = "I"; }
-                else if (fire == "I") { fire = "780"; }
-                else { return "Error"; }
+                if (fire == "780") fire = "I";
+                else if (fire == "I") fire = "780";
+                else return "Error";
 
                 for (int z = 0; z < ripl; z++)
                 {
                     if (fire == "I")
                     {
-                        if (x == 0) { break; }
-                        else
-                        {
-                            left_arr = $"{num[count - x]}{left_arr}";
-                        }
+                        if (x == 0) break;
+                        else left_arr = $"{num[count - x]}{left_arr}";
                     }
-
                     else if (fire == "780")
                     {
-                        if (x == 0) { break; }
-                        else
-                        {
-                            right_arr = $"{right_arr}{num[count - x]}";
-                        }
-                    }
-                    x--;
+                        if (x == 0) break;
+                        else right_arr = $"{right_arr}{num[count - x]}";
+                    }x--;
                 }
-                if (x == 0) { break; }
+                if (x == 0) break;
             }
-
             string outout = "";
-
             if (mode == 0)
             {
-                if (rip > 0)
-                {
-                    outout = $"{left_arr}{placehold}{right_arr}";
-                }
-                else
-                {
-                    outout = $"{revstr(left_arr)}{placehold}{revstr(right_arr)}";
-                }
+                if (rip > 0) outout = $"{left_arr}{placehold}{right_arr}";
+                else outout = $"{revstr(left_arr)}{placehold}{revstr(right_arr)}";
             }
             else
             {
-                if (rip > 0)
-                {
-                    outout = $"{right_arr}{placehold}{left_arr}";
-                }
-                else
-                {
-                    outout = $"{revstr(right_arr)}{placehold}{revstr(left_arr)}";
-                }
+                if (rip > 0) outout = $"{right_arr}{placehold}{left_arr}";
+                else outout = $"{revstr(right_arr)}{placehold}{revstr(left_arr)}";
             }
 
             return outout;
@@ -392,40 +283,19 @@ namespace Calculator
         public string? disp()
         {
             string outout = $"<{base_value}";
-
             if (polar != 2)
             {
-                if (polar == 0)
-                {
-                    outout += "ঋ";
-                }
-                else if (polar == 1)
-                {
-                    outout += "দ";
-                }
+                if (polar == 0) outout += "ঋ";
+                else if (polar == 1) outout += "দ";
             }
-            if (discretion != 0)
-            {
-                outout += "গ";
-            }
+            if (discretion != 0) outout += "গ";
             if (echo != 2)
             {
-                if (echo == 0)
-                {
-                    outout += $"+ল{ripple}";
-                }
-                else if (echo == 1)
-                {
-                    outout += $"-ল{ripple}";
-                }
+                if (echo == 0) outout += $"+ল{ripple}";
+                else if (echo == 1) outout += $"-ল{ripple}";
             }
-            if (velocity != 1)
-            {
-                outout += $"স{velocity}";
-            }
-
+            if (velocity != 1) outout += $"স{velocity}";
             display = outout + "T";
-
             return display;
         }
 
@@ -435,7 +305,7 @@ namespace Calculator
 
         public decimal disintegrate(string num, Basal inbas)
         {
-            if (inbas.echo != 2) { num = inbas.unechor(inbas.ripple, num, inbas.echo); }
+            if (inbas.echo != 2) num = inbas.unechor(inbas.ripple, num, inbas.echo);
 
             num += "0";
             if (inbas.polar != 2)
@@ -444,7 +314,7 @@ namespace Calculator
 
                 for (int z = 0; z < l; z++)
                 {
-                    if (num[z] == '.') { continue ;}
+                    if (num[z] == '.') continue;
                     q--;
                     if (z % 2 == inbas.polar)
                         outout += (((int)num[z]) - 48) * expor(inbas.base_value, (q * inbas.velocity)) * q;
@@ -456,7 +326,7 @@ namespace Calculator
             else
             {
                 po = 0;
-                if (num[num.Length - 1] == '-') { num = num.Substring(1) ; po = 1; }
+                if (num[num.Length - 1] == '-') num = num.Substring(1) ; po = 1;
                 decimal outout = 0M ; num.Join(revstr(num));
 
                 if (num.IndexOf('.') != -1)
@@ -476,10 +346,8 @@ namespace Calculator
                     { outout += Basal.expor(inbas.base_value, ((z - 1) * inbas.velocity)) * (((int)num[z]) - 48) * z; }
                 }
 
-                if (po == 0)
-                    return outout;
-                else
-                    return 0 - outout;
+                if (po == 0) return outout;
+                else return 0 - outout;
             }
         }
 
@@ -522,12 +390,9 @@ namespace Calculator
             ripple = rip;
             velocity = vel;
 
-            if (echo != 2)
-                num = unechor(rip, num, echo);
-            if (pol != 2)
-                value = polaris(num, bass, vel, pol);
-            else
-                value = tobasten(num, bass, vel);
+            if (echo != 2) num = unechor(rip, num, echo);
+            if (pol != 2) value = polaris(num, bass, vel, pol);
+            else value = tobasten(num, bass, vel);
         }
 
         public Basal(
@@ -564,18 +429,9 @@ namespace Calculator
             echo = eco;
             ripple = rip;
             velocity = vel;
-
             number = notobasten(num, bass, vel, 70);
-
-            if (polar != 2)
-            {
-                number = depolaris(number, bass, vel, pol, 70);
-            }
-
-            if (echo != 2)
-            {
-                number = echor(number, echo, rip, 0);
-            }
+            if (polar != 2) number = depolaris(number, bass, vel, pol, 70);
+            if (echo != 2) number = echor(number, echo, rip, 0);
         }
     }
 }
