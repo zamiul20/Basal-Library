@@ -1,8 +1,8 @@
 # Coverting a base to another base
 
-There are 2 ways of converting bases
-1. Converting to another base
-2. Converting to another base from a defined base
+There are 2 ways of converting bases, the name of the specific function in brackets
+1. Converting to another base (convert)
+2. Converting to another base from a defined base (casting)
 
 Get the value of the number you want to convert, and calculate the digit collection in the following order:
 1. Base value and velocity (percieve it as {base value ^ velocity})
@@ -10,12 +10,12 @@ Get the value of the number you want to convert, and calculate the digit collect
 3. Direction
 4. Echo
 
-For converting bases, the symbol to use as an operator is `র`
+For converting / casting bases, the symbol to use as an operator is `র`
 
 First Method : Converting an arbitary base to another, by using the input number's base 
-Second Method : Converting an arbitary base to another, by using a given base (has to be discrete), converting the input number as if it were that
+Second Method : Converting an arbitary base to another, by using a given base (has to be discrete), converting the input number as if it were that.
 
-Note : the first method cannot change a number's value, only how it is represented; the second method can change the value of the number
+Note : the first method cannot change a number's value, only how it is represented; the second method can change the value of the number as well.
 
 Example:
 ```
