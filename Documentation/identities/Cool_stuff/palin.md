@@ -6,6 +6,6 @@ The only values that has a palindromic representation in any base is 0 (zero), a
 
 Numbers of the exact same base can have the exact same value, but have different digit collections: <2T 1, 1, 0 and 0.5, 1.5, 1
 
-<31T 1 2 24 30 24 2 1 is a panindrome, but it is not a palindrome in denary (being <10T 9 6 7 8 4 3 3 4 4)
+<31T 1 2 24 30 24 2 1 is a palindrome, but it is not a palindrome in denary (being <10T 9 6 7 8 4 3 3 4 4)
 
 What if there was a value that is a palindrome in as many bases, to which there would be an infinite amount, as there could be an infinitesimal difference of a base, making a completely different digit collection, which can also be a palindrome.
